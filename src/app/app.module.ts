@@ -8,9 +8,10 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 
 import { AppComponent } from './app.component';
+import { WelcomeComponent } from './containers/welcome/welcome.component';
 import { AdminComponent } from './containers/admin/admin.component';
 import { LoginComponent } from './containers/login/login.component';
-import {AppRoutes} from './routes.config';
+import { AppRoutes } from './routes.config';
 
 
 
@@ -28,7 +29,8 @@ const firebaseConfig = {
     declarations: [
         AppComponent,
         AdminComponent,
-        LoginComponent
+        LoginComponent,
+        WelcomeComponent
     ],
     imports: [
         BrowserModule,
@@ -41,4 +43,4 @@ const firebaseConfig = {
     providers: [],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
