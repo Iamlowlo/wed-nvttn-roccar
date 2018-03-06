@@ -1,5 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+@import "_variables";
+
+html,
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
 body {
   background: #111;
   background-color: #EEE;
+} 
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.btn {
+  padding: 0.7em 1.7em;
+  background-color:#FAFAFA;
+  color:#333;
+  border: 1px solid #333;
+  border-radius: 2px;
+  &-primary {
+    border-color: $primary;
+  }
+  &-secondary {
+    border-color: $secondary;
+  }
+  &-alert {
+    border-color: $alert;
+  }
 }
