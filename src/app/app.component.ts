@@ -15,6 +15,7 @@ export class AppComponent implements OnDestroy {
   // private user: Observable<firebase.User>;
   private items: AngularFireList<any[]>;
   private subscriptions: Array<Subscription>;
+  private isAuth: boolean;
   title = 'app';
 
   constructor(
@@ -23,7 +24,9 @@ export class AppComponent implements OnDestroy {
       public router: Router
   ) {
       this.subscriptions = [];
+      this.isAuth = false;
       this.subscriptions.push(this.afAuth.authState.subscribe(authState => {
+          this.isAuth = !!authState;
           if (!authState) {
               this.router.navigate(['']);
           }

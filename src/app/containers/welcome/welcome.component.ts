@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AngularFireDatabase} from 'angularfire2/database';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-welcome',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
+  private items: Observable<any>;
 
-  constructor() { }
+  constructor(db: AngularFireDatabase) {
+    this.items = db.list('guests').valueChanges();
+  }
 
   ngOnInit() {
   }

@@ -6,6 +6,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import {Subscription} from 'rxjs/Subscription';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
       public afAuth: AngularFireAuth,
-      public af: AngularFireDatabase
+      public af: AngularFireDatabase,
+      public router: Router
   ) {
       this.subscriptions = [];
       console.log(this.afAuth);
@@ -47,6 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.afAuth.auth.signInWithEmailAndPassword(form.user, form.pass)
           .then(resp => {
             console.log('resp', resp);
+            this.router.navigate(['welcome']);
           })
           .catch(err => {
             console.log('err', err);

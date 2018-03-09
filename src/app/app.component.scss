@@ -1,4 +1,22 @@
 :host {
-  display: block;
+  align-items: center;
   background-image: url('../assets/bg_grey.jpg');
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.main-wrapper {
+   display: block;
+   padding: 20px;
+   border-radius: 5px;
+   background-color: #F0F0F0;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  .btn {
+    margin-left: 1em;
+  }
 }
