@@ -27,14 +27,24 @@ export class AppComponent implements OnDestroy {
       this.isAuth = false;
       this.subscriptions.push(this.afAuth.authState.subscribe(authState => {
           this.isAuth = !!authState;
-          if (!authState) {
+          if (this.isAuth) {
+              window.localStorage.setItem('uid', this.afAuth.auth.currentUser.uid);
+          } else {
               this.router.navigate(['']);
+          }
+      }));
+      this.subscriptions.push(
+        this.af.object('data').valueChanges().subscribe(appData => {
+          console.log('appData', appData, !!appData)
+          if (!!appData) {
+              window.localStorage.setItem('appData', JSON.stringify(appData));
           }
       }));
   }
 
   logOut() {
       this.afAuth.auth.signOut();
+      window.localStorage.clear();
   }
 
   ngOnDestroy() {

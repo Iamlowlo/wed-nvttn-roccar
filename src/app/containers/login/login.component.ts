@@ -27,19 +27,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       public afAuth: AngularFireAuth,
       public af: AngularFireDatabase,
       public router: Router
-  ) {
-      this.subscriptions = [];
-      console.log(this.afAuth);
-      this.subscriptions.push(this.afAuth.authState.subscribe(authState => {
-        console.log(authState);
-      }));
-      // this.items = this.af.list('/guests/0');
-      // this.items.valueChanges().subscribe(console.log);
-  }
+  ) {}
 
-  ngOnInit() {
-    console.log('items', this.items);
-  }
+  ngOnInit() {}
+
   onSubmit() {
     if (this.loginForm.valid) {
       this.signIn(this.loginForm.value);
@@ -48,15 +39,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   signIn(form) {
       this.afAuth.auth.signInWithEmailAndPassword(form.user, form.pass)
           .then(resp => {
-            console.log('resp', resp);
             this.router.navigate(['welcome']);
           })
           .catch(err => {
             console.log('err', err);
           });
   }
-  ngOnDestroy() {
-      this.subscriptions.forEach(subscription => subscription.unsubscribe());
-  }
+  ngOnDestroy() {}
 
 }

@@ -1,5 +1,5 @@
+<h1>Hola {{user.name}}!</h1>
 <ul class="celebration-choice_container">
-  <li class="celebration-choice"><span class="celebration-choice_text-holder">Ven a comer</span></li>
-  <li class="celebration-choice"><span class="celebration-choice_text-holder">Ven a celebrarlo</span></li>
+  <li *ngIf="!!user.lunch" class="celebration-choice"><span class="celebration-choice_text-holder">Ven a comer</span></li>
+  <li *ngIf="!!user.party" class="celebration-choice"><span class="celebration-choice_text-holder">Ven a celebrarlo</span></li>
 </ul>
-<div>{{items | async | json}}</div>
