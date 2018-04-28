@@ -1,0 +1,48 @@
+.input_list {
+  margin-bottom: 1em;
+  margin-top: 1em;
+  padding-top: 1em;
+  position: relative;
+  &:first-child {
+    margin-top: 2em;
+  }
+  &:last-child {
+    margin-bottom: 2em;
+  }
+  &.focused {
+    label {
+      transform: translateY(-100%) scale(0.8);
+    }
+  }
+
+  input {
+    &[type='text'],
+    &[type='number'],
+    &[type='password'],
+    &[type='email'] {
+      width: 100%;
+    }
+  }
+}
+
+label {
+  position: absolute;
+  transition: transform 0.2s ease-in;
+  transform-origin: left;
+}
+input {
+  &[type='text'],
+  &[type='number'],
+  &[type='password'],
+  &[type='email'] {
+    background-color: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid grey;
+    font-size: 1.1em;
+    &:focus {
+      outline: none;
+    }
+  }
+}

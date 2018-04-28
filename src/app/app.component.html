@@ -1,7 +1,2 @@
-<div class="main-wrapper">
-  <header>
-    <h1>Hace mucho tiempo...</h1>
-    <button *ngIf="isAuth" class="btn btn-primary" (click)="logOut()">Log Out</button>
-  </header>
-  <router-outlet></router-outlet>
-</div>
+<button *ngIf="isAuth" class="btn btn-primary" (click)="logOut()">Log Out</button>
+<router-outlet></router-outlet>

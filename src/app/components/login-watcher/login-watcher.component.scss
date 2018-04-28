@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  position: absolute;
+  bottom: calc(100% - 35px);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 1;
+
+  .upper_eye_lid,
+  .lower_eye_lid {
+    transition: transform 0.2s ease-in;
+  }
+
+  .upper_eye_lid.left_eye_lid{
+    transform-origin: 34px 25px;
+  }
+
+  .lower_eye_lid.left_eye_lid{
+    transform-origin: 34px 46px;
+  }
+
+  .upper_eye_lid.right_eye_lid{
+    transform-origin: 63px 25px;
+  }
+
+  .lower_eye_lid.right_eye_lid {
+    transform-origin: 63px 46px;
+  }
+
+  &.ready {
+    &:not(.not_looking) {
+      .upper_eye_lid,
+      .lower_eye_lid {
+          transform: scaleY(0) scaleX(0.6);
+      }
+    }
+  }
+}

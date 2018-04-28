@@ -1,13 +1,28 @@
-<form novalidate [formGroup]="loginForm" (submit)="onSubmit()">
-    <ul>
-        <li class="input_list">
-            <label for="user">Usuario</label>
-            <input type="text" formControlName="user" id="user">
-        </li>
-        <li class="input_list">
-            <label for="pass">Contraseña</label>
-            <input type="password" formControlName="pass" id="pass">
-        </li>
-    </ul>
-    <button>Enviar</button>
-</form>
+<app-login-watcher
+        [isReady]="isLoginWatcherReady"
+        [inputLength]="loginForm.get('user').value.length"
+        [notLooking]="loginForm.get('pass').value"
+        *ngIf="isShowingWatcher"
+        [@showUp]="{value:'*', params: {duration_1: 400, duration_2: 100}}"
+        (@showUp.done)="onLoginWatcherDone($event)"
+></app-login-watcher>
+<div class="main-wrapper">
+    <header>
+        <h1>Hace mucho tiempo...</h1>
+    </header>
+    <form novalidate [formGroup]="loginForm" (submit)="onSubmit()">
+        <ul>
+            <li class="input_list"
+                [ngClass]="{'focused': this.loginForm.get('user').dirty}">
+                <label for="user">Usuario</label>
+                <input type="text" formControlName="user" id="user" autocomplete="off">
+            </li>
+            <li class="input_list"
+                [ngClass]="{'focused': this.loginForm.get('pass').dirty}">
+                <label for="pass">Contraseña</label>
+                <input type="password" formControlName="pass" id="pass" autocomplete="off">
+            </li>
+        </ul>
+        <button>Enviar</button>
+    </form>
+</div>

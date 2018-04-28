@@ -10,7 +10,7 @@ import {User} from '../../models/user.model';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
-  private user: User;
+  public user: User;
   private subscriptions: Array<Subscription>;
 
   constructor(db: AngularFireDatabase) {

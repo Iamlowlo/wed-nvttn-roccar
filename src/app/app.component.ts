@@ -13,9 +13,8 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnDestroy {
   // private user: Observable<firebase.User>;
-  private items: AngularFireList<any[]>;
   private subscriptions: Array<Subscription>;
-  private isAuth: boolean;
+  public isAuth: boolean;
   title = 'app';
 
   constructor(
