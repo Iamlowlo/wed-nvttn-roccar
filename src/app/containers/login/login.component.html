@@ -13,14 +13,25 @@
     <form novalidate [formGroup]="loginForm" (submit)="onSubmit()">
         <ul>
             <li class="input_list"
-                [ngClass]="{'focused': this.loginForm.get('user').dirty}">
+                [ngClass]="{
+                    'focused': loginForm.get('user').dirty,
+                    'valid': loginForm.get('user').valid,
+                    'invalid': showError(loginForm.get('user'))
+                    }">
                 <label for="user">Usuario</label>
-                <input type="text" formControlName="user" id="user" autocomplete="off">
+                <input type="text" formControlName="user" id="user" autocomplete="off" email>
+                <span *ngIf="showError(loginForm.get('user'))"
+                      class="error_msg">{{getErrorMessage(loginForm.get('user'))}}</span>
             </li>
             <li class="input_list"
-                [ngClass]="{'focused': this.loginForm.get('pass').dirty}">
+                [ngClass]="{
+                    'focused': loginForm.get('pass').dirty,
+                    'valid': loginForm.get('pass').valid,
+                    'invalid': showError(loginForm.get('pass'))}">
                 <label for="pass">Contraseña</label>
                 <input type="password" formControlName="pass" id="pass" autocomplete="off">
+                <span *ngIf="showError(loginForm.get('pass'))"
+                      class="error_msg">{{getErrorMessage(loginForm.get('pass'))}}</span>
             </li>
         </ul>
         <button>Enviar</button>

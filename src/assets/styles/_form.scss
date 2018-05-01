@@ -1,8 +1,13 @@
+@import "~_variables.scss";
+
 .input_list {
   margin-bottom: 1em;
   margin-top: 1em;
   padding-top: 1em;
   position: relative;
+  height: 2.5em;
+  overflow: hidden;
+  transition: height 0.2s ease-in;
   &:first-child {
     margin-top: 2em;
   }
@@ -14,6 +19,30 @@
       transform: translateY(-100%) scale(0.8);
     }
   }
+  &.invalid {
+    height: 3.5em;
+    label {
+      color: $alert;
+    }
+    input {
+      border-color: $alert;
+      color: darken($alert, 10);
+    }
+  }
+  &.valid {
+    label {
+      color: $primary;
+    }
+    input {
+      border-color: $primary;
+      color: darken($primary, 10);
+    }
+  }
+
+  input,
+  label {
+    transition: color 0.2s ease-in, border-color 0.2s ease-in;
+  }
 
   input {
     &[type='text'],
@@ -21,7 +50,15 @@
     &[type='password'],
     &[type='email'] {
       width: 100%;
+      font-size: 0.95em;
     }
+  }
+
+  .error_msg {
+    color: $alert;
+    position: absolute;
+    top: 3.2em;
+    font-size: 0.8em;
   }
 }
 

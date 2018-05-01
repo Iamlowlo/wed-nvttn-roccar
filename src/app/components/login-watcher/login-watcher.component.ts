@@ -30,7 +30,7 @@ export class LoginWatcherComponent implements OnInit {
     return this.isNotLooking;
   }
   @Input()
-  public set isReady(val: boolean) { 
+  public set isReady(val: boolean) {
     this._isSet = val;
   }
   public get isReady() {

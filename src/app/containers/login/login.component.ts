@@ -5,7 +5,7 @@ import {FirebaseListObservable} from 'angularfire2/database-deprecated';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import {Subscription} from 'rxjs/Subscription';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {showUp} from '../../app.animations';
 
@@ -20,11 +20,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   private items: AngularFireList<any[]>;
   private msgVal = '';
   public isLoginWatcherReady = false;
-  public isShowingWatcher = true;
+  public isShowingWatcher = false;
   private subscriptions: Array<Subscription>;
   public loginForm = new FormGroup({
       user: new FormControl('', Validators.required),
-      pass: new FormControl('', Validators.required)
+      pass: new FormControl('', [
+        Validators.required,
+        Validators.pattern('(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[_\\-\\.:,;/\\¡¿?!]).{10,20}')
+      ])
   });
 
   constructor(
@@ -34,9 +37,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    setTimeout(() => {
+    window.setTimeout(() => {
       this.isShowingWatcher = true;
-    }, 2000);
+    }, 1000);
   }
 
   onSubmit() {
@@ -58,4 +61,19 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {}
 
+  showError (formControl: AbstractControl) {
+    return formControl.invalid && formControl.touched && formControl.dirty;
+  }
+
+  getErrorMessage(formControl: AbstractControl) {
+    const firstError = !!formControl ? Object.keys(formControl.errors)[0] : {};
+    switch (firstError) {
+      case 'required':
+        return 'Este es un campo requerido';
+      case 'email':
+        return 'No es un email valido';
+      case 'pattern':
+        return 'La contraseña no cumple los requisitos';
+    }
+  }
 }
