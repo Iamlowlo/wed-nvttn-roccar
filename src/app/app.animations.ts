@@ -53,3 +53,17 @@ export const showUp = trigger('showUp', [
   )
 ]);
 
+export const fadeIn = trigger('fadeIn', [
+  transition(
+    ':enter',
+    [
+      style( {opacity: 0}),
+      animate(
+        '{{duration}}ms {{delay}}ms ease-in-out',
+        style( {opacity: 1})
+      )
+    ],
+    { params: { duration: defaultDuration, delay: defaultDelay } }
+  )
+]);
+

@@ -1,5 +1,16 @@
-<h1>Hola {{user.name}}!</h1>
-<ul class="celebration-choice_container">
-  <li *ngIf="!!user.lunch" class="celebration-choice"><span class="celebration-choice_text-holder">Ven a comer</span></li>
-  <li *ngIf="!!user.party" class="celebration-choice"><span class="celebration-choice_text-holder">Ven a celebrarlo</span></li>
-</ul>
+<p *ngIf="introStep === 1"
+   [@fadeIn]="{value:'*', params:{duration: 200}}"
+   class="">Hace mucho tiempo, en una dehesa muy muy lejana...</p>
+<img *ngIf="introStep === 2" src="assets/star-wars.svg" alt="">
+<div *ngIf="introStep === 3"
+     class="intro_crawl">
+  <h1>Episodio 1<sub>1/2</sub></h1>
+  <h2>La celebración de los freaks</h2>
+  <p>¡Sorpresa! Después de 7 años de bichueladas y trastadas, por fin ambos bandos se han puesto de acuerdo.</p>
+  <p>En una contundente jugada, después de 10 kilómetros de esfuerzo, Descerebrado se armó de valor y Pequeñita, exhausta dijo sí.</p>
+  <p>Juntos han decidido celebrar su unión y contar contigo en una misión concreta...</p>
+</div>
+<button *ngIf="showSkip"
+        [@fadeIn]
+        class="btn btn-transp skip_btn"
+        type="button">Saltar</button>

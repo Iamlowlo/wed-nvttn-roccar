@@ -1,51 +1,18 @@
 @import "~_variables.scss";
 
-.celebration-choice {
-  $celebrationChoice: &;
-  &_container {
-    display: flex;
-    padding: 20px;
-  }
+:host {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: #111111;
+}
 
-  padding: 20px;
-  border: 1px solid #333;
-  position: relative;
-  &:before {
-    display: block;
-    font-size: 3em;
-    height: 1em;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-  }
-  &:nth-child(odd) {
-    color: $primary;
-    padding-right: 40px;
-    &:before {
-      content: 'O';
-      left: calc(100% - 0.5em);
-    }
-  }
-  &:nth-child(even) {
-    color: $secondary;
-    padding-left: 40px;
-    &:before {
-      content: 'O';
-      right: calc(100% - 0.5em);
-    }
-  }
-  &:hover {
-    background-color: red;
-    &:nth-child(odd) {
-      #{$celebrationChoice}_text-hoder {
-        margin-right: 0.5em;
-      }
-    }
-    &:nth-child(even) {
-      #{$celebrationChoice}_text-hoder {
-        margin-left: 0.5em;
-      }
-    }
-  }
+.skip_btn {
+  position: absolute;
+  font-size: 1.5em;
+  bottom: 1em;
+  right: 1em;
 }

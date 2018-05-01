@@ -4,7 +4,7 @@ import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,12 @@ export class AppComponent implements OnDestroy {
   // private user: Observable<firebase.User>;
   private subscriptions: Array<Subscription>;
   public isAuth: boolean;
-  title = 'app';
+  public hasLogout: boolean;
+
+  private noLogoutRoutes = [
+      '/welcome',
+      '/login'
+  ];
 
   constructor(
       public afAuth: AngularFireAuth,
@@ -24,21 +29,28 @@ export class AppComponent implements OnDestroy {
   ) {
       this.subscriptions = [];
       this.isAuth = false;
-      this.subscriptions.push(this.afAuth.authState.subscribe(authState => {
-          this.isAuth = !!authState;
-          if (this.isAuth) {
-              window.localStorage.setItem('uid', this.afAuth.auth.currentUser.uid);
-          } else {
-              this.router.navigate(['']);
-          }
-      }));
+      this.hasLogout = true;
       this.subscriptions.push(
+          this.router.events.subscribe(route => {
+              if (route instanceof NavigationEnd && this.noLogoutRoutes.findIndex(_route => _route === route.url) >= 0) {
+                this.hasLogout = false;
+              }
+          }),
+          this.afAuth.authState.subscribe(authState => {
+              this.isAuth = !!authState;
+              if (this.isAuth) {
+                  window.localStorage.setItem('uid', this.afAuth.auth.currentUser.uid);
+              } else {
+                  this.router.navigate(['']);
+              }
+          }),
         this.af.object('data').valueChanges().subscribe(appData => {
-          console.log('appData', appData, !!appData)
-          if (!!appData) {
-              window.localStorage.setItem('appData', JSON.stringify(appData));
-          }
-      }));
+            console.log('appData', appData, !!appData)
+            if (!!appData) {
+                window.localStorage.setItem('appData', JSON.stringify(appData));
+            }
+        })
+      );
   }
 
   logOut() {

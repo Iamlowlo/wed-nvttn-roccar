@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       user: new FormControl('', Validators.required),
       pass: new FormControl('', [
         Validators.required,
-        Validators.pattern('(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[_\\-\\.:,;/\\¡¿?!]).{10,20}')
+        Validators.pattern('(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[_\\-\\.:,;/\\¡¿?!]).{10,24}')
       ])
   });
 

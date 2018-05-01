@@ -1,6 +1,7 @@
 @import "_variables";
 @import "./assets/styles/_fonts";
 @import "./assets/styles/_form";
+@import "./assets/styles/_btn";
 
 html,
 body {
@@ -32,30 +33,4 @@ h1, h2, h3,
 h4, h5, h6 {
   font-family: 'Passion One', "Arial Black", sans-serif;
   margin: 0;
-}
-
-.btn {
-  padding: 0.7em 1.7em;
-  background-color:$alabaster;
-  border-width: 1px;
-  border-style:  solid;
-  border-radius: 3px;
-  cursor: pointer;
-  font-family: 'Rubik', Arial, sans-serif;
-  font-weight: $medium;
-  transition: background-color 0.2s ease-in;
-  &-primary {
-    background-color: $greenPigment;
-    border-color: $greenPigment;
-    color: $alabaster;
-    &:hover {
-      background-color: desaturate(lighten($greenPigment, 5), 10);
-    }
-  }
-  &-secondary {
-    border-color: $secondary;
-  }
-  &-alert {
-    border-color: $alert;
-  }
 }
