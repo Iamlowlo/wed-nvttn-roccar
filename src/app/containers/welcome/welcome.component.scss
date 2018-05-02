@@ -8,6 +8,7 @@
   right: 0;
   left: 0;
   background-color: #111111;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .centered {
@@ -27,6 +28,7 @@
 }
 
 .starWars_logo {
+  opacity: 0;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -36,10 +38,28 @@
 
 .intro_crawl {
   color: #FFC500;
-  font-size: 1.3em;
+  font-size: 1.2em;
   padding: 0.5em;
+  transform: perspective(200px) rotateX(25deg) translateY(-10%);
+  width: 90%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
   h1, h2 {
     text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+  }
+  h1 {
+    font-size: 1.1em;
+    padding-bottom: 0.8em;
+    sub {
+      font-size: 0.5em;
+      position: relative;
+      line-height: 0;
+      bottom: 0.43em;
+    }
   }
   h2 {
     text-transform: uppercase;
@@ -48,7 +68,7 @@
 
 .skip_btn {
   position: absolute;
-  font-size: 1.5em;
+  font-size: 1em;
   bottom: 1em;
   right: 1em;
 }

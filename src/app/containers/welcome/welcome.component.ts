@@ -3,13 +3,13 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {User} from '../../models/user.model';
-import {fadeIn, fadeOut, fadeOutShrinking} from '../../app.animations';
+import {fadeIn, fadeOut, fadeOutShrinking, textCrawl} from '../../app.animations';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
-  animations: [fadeIn, fadeOut, fadeOutShrinking]
+  animations: [fadeIn, fadeOut, fadeOutShrinking, textCrawl]
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
   public appData;
@@ -39,6 +39,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   animationStepper(event, toState, stepTriggered, delay) {
     if (event.toState === toState) {
+      console.log('event', event);
       setTimeout(() => {
         this.introStep += 1;
       }, delay || 2000);

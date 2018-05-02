@@ -83,7 +83,7 @@ export const fadeOut = trigger('fadeOut', [
 
 export const fadeOutShrinking = trigger('fadeOutShrinking', [
   transition(
-    ':leave',
+    ':enter',
     [
       style( {
         opacity: 1,
@@ -92,7 +92,23 @@ export const fadeOutShrinking = trigger('fadeOutShrinking', [
         '{{duration}}ms {{delay}}ms ease-in-out',
         style( {
           opacity: 0,
-          transform: 'translate(-50%, -50%) scale(0.2)'})
+          transform: 'translate(-50%, -50%) scale(0.1)'})
+      )
+    ],
+    { params: { duration: defaultDuration, delay: defaultDelay } }
+  )
+]);
+
+export const textCrawl = trigger('textCrawl', [
+  transition(
+    ':enter',
+    [
+      style( {
+        transform: ' perspective(200px) rotateX(25deg) translateZ(0px) translateY(80%)'}),
+      animate(
+        '{{duration}}ms {{delay}}ms linear',
+        style( {
+          transform: ' perspective(200px) rotateX(25deg) translateZ(0px) translateY(-10%)'})
       )
     ],
     { params: { duration: defaultDuration, delay: defaultDelay } }
