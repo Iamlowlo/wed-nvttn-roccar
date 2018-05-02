@@ -10,9 +10,54 @@
   background-color: #111111;
 }
 
+.centered {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.intro_text {
+  color: #55b2bb;
+  font-size: 1.3em;
+  width: 360px;
+  height: 3em;
+}
+
+.starWars_logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 75%;
+  width: 220%;
+}
+
+.intro_crawl {
+  color: #FFC500;
+  font-size: 1.3em;
+  padding: 0.5em;
+  h1, h2 {
+    text-align: center;
+  }
+  h2 {
+    text-transform: uppercase;
+  }
+}
+
 .skip_btn {
   position: absolute;
   font-size: 1.5em;
   bottom: 1em;
   right: 1em;
+}
+
+.info_logger {
+  background: #DDD;
+  color: #333;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 0.5em;
 }

@@ -67,3 +67,35 @@ export const fadeIn = trigger('fadeIn', [
   )
 ]);
 
+export const fadeOut = trigger('fadeOut', [
+  transition(
+    ':leave',
+    [
+      style( {opacity: 1, position: 'absolute'}),
+      animate(
+        '{{duration}}ms {{delay}}ms ease-in-out',
+        style( {opacity: 0})
+      )
+    ],
+    { params: { duration: defaultDuration, delay: defaultDelay } }
+  )
+]);
+
+export const fadeOutShrinking = trigger('fadeOutShrinking', [
+  transition(
+    ':leave',
+    [
+      style( {
+        opacity: 1,
+        transform: 'translate(-50%, -50%) scale(1)'}),
+      animate(
+        '{{duration}}ms {{delay}}ms ease-in-out',
+        style( {
+          opacity: 0,
+          transform: 'translate(-50%, -50%) scale(0.2)'})
+      )
+    ],
+    { params: { duration: defaultDuration, delay: defaultDelay } }
+  )
+]);
+

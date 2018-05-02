@@ -1,7 +1,14 @@
 <p *ngIf="introStep === 1"
    [@fadeIn]="{value:'*', params:{duration: 200}}"
-   class="">Hace mucho tiempo, en una dehesa muy muy lejana...</p>
-<img *ngIf="introStep === 2" src="assets/star-wars.svg" alt="">
+   [@fadeOut]="{value:'*', params:{duration: 5000}}"
+   (@fadeIn.done)="animationStepper($event, '*', 1, 4000)"
+   class="intro_text centered">Hace mucho tiempo, en una dehesa<br>muy, muy lejana....</p>
+<img *ngIf="introStep === 2"
+     [@fadeIn]="{value:'*', params:{duration: 200}}"
+     [@fadeOutShrinking]="{value:'*', params:{duration: 5000}}"
+     (@fadeIn.done)="animationStepper($event, '*', 2, 5000)"
+     class="starWars_logo"
+     src="assets/star-wars.svg" alt="">
 <div *ngIf="introStep === 3"
      class="intro_crawl">
   <h1>Episodio 1<sub>1/2</sub></h1>
@@ -14,3 +21,6 @@
         [@fadeIn]
         class="btn btn-transp skip_btn"
         type="button">Saltar</button>
+<pre class="info_logger">
+    {{introStep | json}}
+</pre>
