@@ -22,8 +22,8 @@
 
 .intro_text {
   color: #55b2bb;
-  font-size: 1.3em;
-  width: 360px;
+  font-size: 1.1em;
+  max-width: 17em;
   height: 3em;
 }
 
@@ -40,12 +40,14 @@
   color: #FFC500;
   font-size: 1.2em;
   padding: 0.5em;
-  transform: perspective(200px) rotateX(25deg) translateY(-10%);
-  width: 90%;
+  transform: perspective(200px) rotateX(25deg) translateY(-60%);
+  max-width: 85%;
+  width: 25em;
   position: absolute;
   left: 0;
   right: 0;
   margin: auto;
+  opacity: 0;
   h1, h2 {
     text-align: center;
     font-family: 'Open Sans', sans-serif;
@@ -64,6 +66,9 @@
   h2 {
     text-transform: uppercase;
   }
+  p {
+    text-align: justify;
+  };
 }
 
 .skip_btn {

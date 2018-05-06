@@ -3,7 +3,7 @@ import {
   state,
   style,
   animate,
-  transition
+  transition, group
 } from '@angular/animations';
 import index from '@angular/cli/lib/cli';
 
@@ -104,14 +104,22 @@ export const textCrawl = trigger('textCrawl', [
     ':enter',
     [
       style( {
-        transform: ' perspective(200px) rotateX(25deg) translateZ(0px) translateY(80%)'}),
-      animate(
-        '{{duration}}ms {{delay}}ms linear',
-        style( {
-          transform: ' perspective(200px) rotateX(25deg) translateZ(0px) translateY(-10%)'})
-      )
+        opacity: 1,
+        transform: 'perspective(200px) rotateX(25deg) translateZ(0px) translateY(90%)'}),
+      group([
+        animate(
+          '{{duration_leave}}ms {{delay_leave}}ms linear',
+          style( {
+            transform: 'perspective(200px) rotateX(25deg) translateZ(0px) translateY(-60%)'})
+        ),
+        animate(
+          '{{duration_fade}}ms {{delay_fade}}ms linear',
+          style( {
+            opacity: 0})
+        )
+      ])
     ],
-    { params: { duration: defaultDuration, delay: defaultDelay } }
+    { params: { duration_leave: defaultDuration, delay_leave: defaultDelay, duration_fade: defaultDuration, delay_fade: defaultDelay } }
   )
 ]);
 

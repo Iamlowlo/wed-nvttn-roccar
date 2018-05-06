@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {User} from '../../models/user.model';
 import {fadeIn, fadeOut, fadeOutShrinking, textCrawl} from '../../app.animations';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
@@ -17,7 +18,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   public introStep: number;
   private subscriptions: Array<Subscription>;
 
-  constructor(db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase, private router: Router) {
     this.subscriptions = [];
     this.showSkip = false;
     this.introStep = 0;
@@ -44,6 +45,10 @@ export class WelcomeComponent implements OnInit, OnDestroy {
         this.introStep += 1;
       }, delay || 2000);
     }
+  }
+
+  animationEnded() {
+    this.router.navigate(['landing']);
   }
 
 }

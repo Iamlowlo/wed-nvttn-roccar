@@ -17,6 +17,7 @@ import { AdminComponent } from './containers/admin/admin.component';
 import { LoginComponent } from './containers/login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginWatcherComponent } from './components/login-watcher/login-watcher.component';
+import { LandingComponent } from './containers/landing/landing.component';
 
 
 
@@ -36,7 +37,8 @@ const firebaseConfig = {
         AdminComponent,
         LoginComponent,
         WelcomeComponent,
-        LoginWatcherComponent
+        LoginWatcherComponent,
+        LandingComponent
     ],
     imports: [
         BrowserModule,

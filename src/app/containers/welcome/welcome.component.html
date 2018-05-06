@@ -6,11 +6,12 @@
 <img *ngIf="introStep === 2"
      [@fadeIn]="{value:'*', params:{duration: 500}}"
      [@fadeOutShrinking]="{value:'*', params:{duration: 6000}}"
-     (@fadeIn.done)="animationStepper($event, '*', 2, 6000)"
+     (@fadeIn.start)="animationStepper($event, '*', 2, 4000)"
      class="starWars_logo"
      src="assets/star-wars.svg" alt="">
 <div *ngIf="introStep === 3"
-     [@textCrawl]="{value:'*', params:{duration: 25000}}"
+     [@textCrawl]="{value:'*', params:{duration_leave: 25000, duration_fade: 5000, delay_fade: 20000}}"
+     (@textCrawl.done)="animationEnded()"
      class="intro_crawl">
   <h1>Episodio 1<sub>1/2</sub></h1>
   <h2>La celebración de los freaks</h2>
