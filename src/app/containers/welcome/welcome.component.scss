@@ -28,12 +28,13 @@
 }
 
 .starWars_logo {
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   left: 50%;
   top: 50%;
   height: 75%;
   width: 220%;
+  transform: translate(-50%, -50%);
 }
 
 .intro_crawl {

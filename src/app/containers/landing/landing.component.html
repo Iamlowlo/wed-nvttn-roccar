@@ -1,3 +1,18 @@
-<p>
-  landing works!
-</p>
+<section *ngIf="!!userData" class="main_section">
+  <button *ngIf="isAuth" class="btn btn-primary" (click)="logOut()">Salir</button>
+  <header>
+    <h1>Ayúdanos {{userData?.name}}, eres nuestra única esperanza</h1>
+  </header>
+    <nav>
+        <ul>
+            <li [routerLink]="['ceremonia']">Ceremonia</li>
+            <li *ngIf="userData && userData.lunch"
+                [routerLink]="['comida']">Comida</li>
+            <li *ngIf="userData && userData.party"
+                [routerLink]="['fiesta']">Fiesta</li>
+        </ul>
+    </nav>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+</section>

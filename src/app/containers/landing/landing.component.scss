@@ -1,0 +1,30 @@
+@import "~_variables.scss";
+
+:host {
+  display: block;
+  position: relative;
+  margin-top: 3.2em;
+}
+
+.main_section {
+  background-color: #F0F0F0;
+  border-radius: 2px;
+  margin: auto;
+  max-width: 90%;
+  padding: 1em;
+}
+
+nav {
+  ul {
+    display: flex;
+  }
+  li {
+    padding: 0.6em 0.8em;
+    &:first-child {
+      margin-left: -0.8em;
+    }
+    &:last-child {
+      margin-right: -0.8em;
+    }
+  }
+}

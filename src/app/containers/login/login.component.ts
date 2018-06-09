@@ -7,13 +7,13 @@ import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import {Subscription} from 'rxjs/Subscription';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {showUp} from '../../app.animations';
+import {dropDown, showUp} from '../../app.animations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  animations: [showUp]
+  animations: [showUp, dropDown]
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private user: Observable<firebase.User>;
@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private msgVal = '';
   public isLoginWatcherReady = false;
   public isShowingWatcher = false;
+  public errorMsg = '';
   private subscriptions: Array<Subscription>;
   public loginForm = new FormGroup({
       user: new FormControl('', Validators.required),
@@ -48,12 +49,23 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
   signIn(form) {
+    this.errorMsg = '';
       this.afAuth.auth.signInWithEmailAndPassword(form.user, form.pass)
           .then(resp => {
             this.router.navigate(['welcome']);
           })
           .catch(err => {
-            console.log('err', err);
+            switch (err.code) {
+              case 'auth/wrong-password':
+                this.errorMsg = 'La contraseña no es válida.';
+                break;
+              case 'auth/user-not-found':
+                this.errorMsg = 'El usuario no existe.';
+                break;
+              default:
+                this.errorMsg = 'Ha habido un problema de conexión.<br>Inténtalo mas tarde.';
+                break;
+            }
           });
   }
   onLoginWatcherDone($event) {

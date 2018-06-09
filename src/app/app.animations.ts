@@ -81,21 +81,32 @@ export const fadeOut = trigger('fadeOut', [
   )
 ]);
 
-export const fadeOutShrinking = trigger('fadeOutShrinking', [
+export const logoStarWars = trigger('logoStarWars', [
   transition(
     ':enter',
+    [
+      style( { opacity: 0 }),
+      animate(
+        '{{duration_in}}ms {{delay}}ms ease-in-out',
+        style( { opacity: 1 })
+      )
+    ],
+    { params: { duration_in: defaultDuration, delay: defaultDelay } }
+  ),
+  transition(
+    ':leave',
     [
       style( {
         opacity: 1,
         transform: 'translate(-50%, -50%) scale(1)'}),
       animate(
-        '{{duration}}ms {{delay}}ms ease-in-out',
+        '{{duration_shrink}}ms {{delay}}ms ease-in-out',
         style( {
           opacity: 0,
           transform: 'translate(-50%, -50%) scale(0.1)'})
       )
     ],
-    { params: { duration: defaultDuration, delay: defaultDelay } }
+    { params: { duration_shrink: defaultDuration, delay: defaultDelay } }
   )
 ]);
 

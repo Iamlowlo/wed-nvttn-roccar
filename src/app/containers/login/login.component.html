@@ -10,7 +10,15 @@
     <header>
         <h1>Hace mucho tiempo...</h1>
     </header>
-    <form novalidate [formGroup]="loginForm" (submit)="onSubmit()">
+    <form novalidate
+          class="form"
+          [formGroup]="loginForm"
+          (submit)="onSubmit()">
+        <div *ngIf="!!errorMsg"
+             [@dropDown]="{value:'*', params: {duration: 200}}"
+             class="form_error">
+            <div class="form_error_msg" [innerHtml]="errorMsg"></div>
+        </div>
         <ul>
             <li class="input_list"
                 [ngClass]="{

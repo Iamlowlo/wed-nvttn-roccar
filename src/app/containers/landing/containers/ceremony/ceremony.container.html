@@ -1,0 +1,29 @@
+<section>
+    <header>
+        <h1>¡Nos casamos!</h1>
+    </header>
+    <div class="intro">
+        <p>El día 17 de Noviembre de 2018 Rocío y Carlos (a partir de ahora <strong><i>nosotros</i></strong>) nos casamos y tenemos {{ userData && userData.party && userData.lunch ? 'dos misiones' : 'una missión'}} para ti.</p>
+        <p>Hemos decidido hacer algo íntimo y quisiéramos que tú fueras parte de ello.</p>
+        <p *ngIf="!userData?.lunch">Dado que tampoco va a ser nada del otro mundo, no es necesario que vengas a la ceremonia, solo si quieres.</p>
+        <p>Aquí debajo encontrarás información sobre la ceremonia, mientras que en la superior podrás navegar al resto de detalles del día.</p>
+    </div>
+    <div>
+        <h2>¿Cuándo?</h2>
+        <p>El 17 de Noviembre de 2018 a las 13.30</p>
+    </div>
+    <div>
+        <h2>¿Dónde?</h2>
+        <p>En la junta municipal del distrito de Arganzuela (Casa del Reloj / Matadero)</p>
+        <div class="img_container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Casa_del_Reloj_%28Madrid%29_03.jpg/1200px-Casa_del_Reloj_%28Madrid%29_03.jpg" alt="">
+        </div>
+    </div>
+    <div>
+        <h2>¿Cómo llegar?</h2>
+        <p>Paseo de la Chopera, 10 - 28045 Madrid</p>
+        <div class="gmap">
+            <div class="mapa">MAPA</div>
+        </div>
+    </div>
+</section>

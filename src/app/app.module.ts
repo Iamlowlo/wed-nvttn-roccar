@@ -18,6 +18,9 @@ import { LoginComponent } from './containers/login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginWatcherComponent } from './components/login-watcher/login-watcher.component';
 import { LandingComponent } from './containers/landing/landing.component';
+import { CeremonyContainer } from './containers/landing/containers/ceremony/ceremony.container';
+import { LunchContainer } from './containers/landing/containers/lunch/lunch.container';
+import { PartyContainer } from './containers/landing/containers/party/party.container';
 
 
 
@@ -38,7 +41,10 @@ const firebaseConfig = {
         LoginComponent,
         WelcomeComponent,
         LoginWatcherComponent,
-        LandingComponent
+        LandingComponent,
+        CeremonyContainer,
+        LunchContainer,
+        PartyContainer
     ],
     imports: [
         BrowserModule,

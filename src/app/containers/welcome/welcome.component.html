@@ -4,13 +4,12 @@
    (@fadeIn.done)="animationStepper($event, '*', 1, 4000)"
    class="intro_text centered">Hace mucho tiempo, en una dehesa<br>muy, muy lejana....</p>
 <img *ngIf="introStep === 2"
-     [@fadeIn]="{value:'*', params:{duration: 500}}"
-     [@fadeOutShrinking]="{value:'*', params:{duration: 6000}}"
-     (@fadeIn.start)="animationStepper($event, '*', 2, 4000)"
+     [@logoStarWars]="{value:'*', params:{duration_in: 500, duration_shrink: 6000}}"
+     (@logoStarWars.done)="animationStepper($event, '*', 2, 0)"
      class="starWars_logo"
      src="assets/star-wars.svg" alt="">
 <div *ngIf="introStep === 3"
-     [@textCrawl]="{value:'*', params:{duration_leave: 25000, duration_fade: 5000, delay_fade: 20000}}"
+     [@textCrawl]="{value:'*', params:{duration_leave: 25000, delay_leave: 4000, duration_fade: 5000, delay_fade: 24000}}"
      (@textCrawl.done)="animationEnded()"
      class="intro_crawl">
   <h1>Episodio 1<sub>1/2</sub></h1>
@@ -21,8 +20,6 @@
 </div>
 <button *ngIf="showSkip"
         [@fadeIn]
+        [routerLink]="['/landing']"
         class="btn btn-transp skip_btn"
         type="button">Saltar</button>
-<pre class="info_logger">
-    {{introStep | json}}
-</pre>

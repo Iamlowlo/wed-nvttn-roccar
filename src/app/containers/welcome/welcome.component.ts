@@ -1,31 +1,38 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AngularFireDatabase} from 'angularfire2/database';
-import {Observable} from 'rxjs/Observable';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
-import {User} from '../../models/user.model';
-import {fadeIn, fadeOut, fadeOutShrinking, textCrawl} from '../../app.animations';
+import {fadeIn, fadeOut, logoStarWars, textCrawl} from '../../app.animations';
 import {Router} from '@angular/router';
+import * as Starfield from 'canvas-starfield';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
-  animations: [fadeIn, fadeOut, fadeOutShrinking, textCrawl]
+  animations: [fadeIn, fadeOut, logoStarWars, textCrawl]
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
   public appData;
   public showSkip: boolean;
   public introStep: number;
   private subscriptions: Array<Subscription>;
+  public starField: Starfield;
 
-  constructor(private db: AngularFireDatabase, private router: Router) {
+  constructor(private router: Router, private element: ElementRef) {
     this.subscriptions = [];
     this.showSkip = false;
-    this.introStep = 0;
+    this.introStep = 1;
     this.appData = JSON.parse(window.localStorage.getItem('appData'));
   }
 
   ngOnInit() {
+    // this.starField = new Starfield({
+    //   canvas: 'app-welcome',
+    //   numStars: 800,
+    //   dx: 0,
+    //   dy: 0,
+    //   maxRadius: 2
+    // });
+
     setTimeout(() => {
       this.introStep = 1;
     }, 1000);
@@ -40,10 +47,9 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   animationStepper(event, toState, stepTriggered, delay) {
     if (event.toState === toState) {
-      console.log('event', event);
       setTimeout(() => {
         this.introStep += 1;
-      }, delay || 2000);
+      }, typeof delay === 'number' ? delay : 2000);
     }
   }
 
