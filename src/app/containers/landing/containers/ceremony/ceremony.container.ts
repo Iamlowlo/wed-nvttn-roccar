@@ -10,9 +10,9 @@ import {User} from '../../../../models/user.model';
 })
 export class CeremonyContainer implements OnInit, OnDestroy {
   private subscription: Subscription;
-  private userData: User;
+  public userData: User;
   constructor(private db: AngularFireDatabase) {
-    this.db.object('guests/' + window.localStorage.getItem('uid'))
+    this.subscription = this.db.object('guests/' + window.localStorage.getItem('uid'))
       .valueChanges()
       .subscribe((userData: User) => {
         this.userData = userData;
