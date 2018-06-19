@@ -13,3 +13,9 @@
   margin: auto;
 }
 
+@media (max-width: 480px) {
+  /deep/ app-login-watcher svg {
+    transform: scale(0.7);
+    transform-origin: 50% 80%;
+  }
+}

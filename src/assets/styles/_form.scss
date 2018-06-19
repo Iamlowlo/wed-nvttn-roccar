@@ -2,14 +2,16 @@
 
 
 .form {
-  padding-top: 1em;
-}
-.form_error {
-  border: 1px solid $crimson;
-  background-color: rgba($crimson, 0.1);
-  color: darken($crimson, 10);
-  &_msg {
-    padding: 0.6em 0.8em;
+  &_error {
+    border: 1px solid $crimson;
+    background-color: rgba($crimson, 0.1);
+    color: darken($crimson, 10);
+    &_msg {
+      padding: 0.6em 0.8em;
+    }
+  }
+  @media (min-width: 480px) {
+    padding-top: 1em;
   }
 }
 
@@ -30,7 +32,7 @@
     }
   }
   &.invalid {
-    height: 3.5em;
+    height: 4.4em;
     label {
       color: $alert;
     }
@@ -70,7 +72,14 @@
     top: 3.2em;
     font-size: 0.8em;
   }
+
+  @media (min-width: 480px) {
+    &.invalid {
+      height: 3.5em;
+    }
+  }
 }
+
 
 label {
   position: absolute;

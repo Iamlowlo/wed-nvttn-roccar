@@ -21,6 +21,7 @@ import { LandingComponent } from './containers/landing/landing.component';
 import { CeremonyContainer } from './containers/landing/containers/ceremony/ceremony.container';
 import { LunchContainer } from './containers/landing/containers/lunch/lunch.container';
 import { PartyContainer } from './containers/landing/containers/party/party.container';
+import { GmapComponent } from './components/gmap/gmap.component';
 
 
 
@@ -44,7 +45,8 @@ const firebaseConfig = {
         LandingComponent,
         CeremonyContainer,
         LunchContainer,
-        PartyContainer
+        PartyContainer,
+        GmapComponent
     ],
     imports: [
         BrowserModule,

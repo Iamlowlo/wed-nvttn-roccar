@@ -2,11 +2,15 @@ $primary: rgb(16, 172, 86);
 $secondary: rgb(155, 10, 78);
 $alert: rgb(214, 14, 14);
 
-$greenPigment: hsla(147%, 88%, 38%, 1);
-$onyx: hsla(196%, 10%, 21%, 1);
-$crimson: hsla(350%, 80%, 48%, 1);
-$darkPurple: hsla(307%, 45%, 14%, 1);
-$alabaster: hsla(15%, 20%, 92%, 1);
+$greenPigment: hsl(147%, 88%, 38%);
+$darkGreenPigment: hsl(147%, 88%, 28%);
+$onyx: hsl(196%, 10%, 21%);
+$crimson: hsl(350%, 80%, 48%);
+$purple: hsl(307%, 45%, 30%);
+$darkPurple: hsl(307%, 45%, 20%);
+$gold: hsl(40%, 65%, 62%);
+$darkGold: hsl(40%, 65%, 62%);
+$alabaster: hsl(15%, 20%, 92%);
 
 $regular: 400;
 $medium: 500;
