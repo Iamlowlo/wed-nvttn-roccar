@@ -1,3 +1,5 @@
+@import "~_variables.scss";
+
 :host {
   display: block;
   position: relative;
@@ -7,10 +9,8 @@
 .main-wrapper {
   padding: 35px 40px 40px;
   position: relative;
-  border-radius: 2px;
-  background-color: #F0F0F0;
+  background-color: $polite_white;
   max-width: 85%;
-  margin: auto;
 }
 
 @media (max-width: 480px) {

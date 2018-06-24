@@ -2,7 +2,19 @@
      class="test"
     [style.width]="width"
     [style.height]="height"></div>
-<div class="searchbox">
-    <input type="text">
-    <button type="button" class="btn btn-primary">SEARCH</button>
-</div>
+<form class="searchbox"
+      novalidate
+      [ngClass]="{'opened': isSearchboxOpened}"
+      [formGroup]="searchForm">
+    <div class="sole_input_container">
+        <input id="address"
+               type="text"
+               name="address"
+               formControlName="address"
+               (focus)=onFocus($event)
+               (blur)=onBlur($event)>
+        <label for="address">¿Desde dónde vas a venir?</label>
+        <button type="button" class="btn btn-primary icon-search"></button>
+    </div>
+    <i class="icon-angle-down" (click)="toggleSearchbox()"></i>
+</form>

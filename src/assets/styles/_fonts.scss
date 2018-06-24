@@ -1,1 +1,102 @@
 @import url('https://fonts.googleapis.com/css?family=Passion+One:700|Rubik:400,500,700&subset=latin-ext|Open+Sans:400,600');
+
+@font-face {
+  font-family: 'wed';
+  src:
+          url('/assets/fonts/wed.ttf?5mm8dp') format('truetype'),
+          url('/assets/fonts/wed.woff?5mm8dp') format('woff'),
+          url('/assets/fonts/wed.svg?5mm8dp#wed') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'wed' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-phone:before {
+  content: "\f095";
+}
+.icon-angle-left:before {
+  content: "\f104";
+}
+.icon-angle-right:before {
+  content: "\f105";
+}
+.icon-angle-up:before {
+  content: "\f106";
+}
+.icon-angle-down:before {
+  content: "\f107";
+}
+.icon-ra:before {
+  content: "\f1d0";
+}
+.icon-rebel:before {
+  content: "\f1d0";
+}
+.icon-resistance:before {
+  content: "\f1d0";
+}
+.icon-empire:before {
+  content: "\f1d1";
+}
+.icon-ge:before {
+  content: "\f1d1";
+}
+.icon-map-signs:before {
+  content: "\f277";
+}
+.icon-map:before {
+  content: "\f278";
+}
+.icon-home:before {
+  content: "\e900";
+}
+.icon-pencil:before {
+  content: "\e905";
+}
+.icon-calendar:before {
+  content: "\e953";
+}
+.icon-user:before {
+  content: "\e971";
+}
+.icon-search:before {
+  content: "\e986";
+}
+.icon-gift:before {
+  content: "\e99f";
+}
+.icon-glass:before {
+  content: "\e9a1";
+}
+.icon-spoon-knife:before {
+  content: "\e9a3";
+}
+.icon-list:before {
+  content: "\e9ba";
+}
+.icon-plus:before {
+  content: "\ea0a";
+}
+.icon-minus:before {
+  content: "\ea0b";
+}
+.icon-cross:before {
+  content: "\ea0f";
+}
+.icon-checkmark:before {
+  content: "\ea10";
+}

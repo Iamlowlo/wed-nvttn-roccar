@@ -1,3 +1,53 @@
+@import "~_variables.scss";
 :host {
   display: block;
+  position: relative;
+}
+
+.searchbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba($onyx, 0.7);
+  border-bottom: 1px solid rgba($zorba, 0.7);
+  border-right: 1px solid rgba($zorba, 0.7);
+  border-bottom-right-radius: 4px;
+  padding: 0.5em 1em 1.5em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  max-height: 1em;
+  transition: max-height 0.3s ease-in;
+  &.opened {
+    max-height: 104px;
+    .icon-angle-down {
+      transform: rotate(180deg);
+    }
+  }
+  input {
+    width: 450px;
+    background-color: rgba(white, 0.7);
+
+  }
+  label {
+    color: $jellyBean;
+  }
+  .ng-focused + label,
+  .ng-touched + label {
+    color: $alabaster;
+  }
+  button {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  .sole_input_container {
+    margin-bottom: 0.5em;
+  }
+  .icon-angle-down {
+    color: $alabaster;
+    position: absolute;
+    bottom: 0.5em;
+    transition: transform 0.3s ease-in;
+  }
 }

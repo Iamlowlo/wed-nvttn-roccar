@@ -9,7 +9,13 @@
      class="starWars_logo"
      src="assets/star-wars.svg" alt="">
 <div *ngIf="introStep === 3"
-     [@textCrawl]="{value:'*', params:{duration_leave: 25000, delay_leave: 4000, duration_fade: 5000, delay_fade: 24000}}"
+     [@textCrawl]="{
+        value:'*',
+        params:{duration_leave: 25000,
+        delay_leave: 2500,
+        duration_fade: 5000,
+        delay_fade: 21000
+        }}"
      (@textCrawl.done)="animationEnded()"
      class="intro_crawl">
   <h1>Episodio 1<sub>1/2</sub></h1>

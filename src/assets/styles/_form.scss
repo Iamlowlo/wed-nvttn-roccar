@@ -97,8 +97,30 @@ input {
     border-right: none;
     border-bottom: 1px solid grey;
     font-size: 1.1em;
+    padding: 0 0.5em;
     &:focus {
       outline: none;
     }
+  }
+}
+
+.sole_input_container {
+  display: flex;
+  position: relative;
+  padding-top: 1.3em;
+  label {
+    position: absolute;
+    top: 1.8em;
+    left: 0.5em;
+    transition: top 0.3s ease-in, font-size 0.3s ease-in, color 0.2s ease-out;
+  }
+  .ng-focused + label,
+  .ng-touched + label {
+    top: 0;
+    font-size: 0.8em;
+  }
+  button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 }

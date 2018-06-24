@@ -1,5 +1,8 @@
 @import "~_variables.scss";
 
+$mobile_side_padding: 1em;
+$desktop_side_padding: 3em;
+
 :host {
   display: block;
   position: relative;
@@ -7,43 +10,80 @@
   margin-bottom: 3.2em;
 }
 
-.main_section {
-  background-color: #F0F0F0;
-  border-radius: 2px;
-  margin: auto;
+.main-wrapper{
   max-width: 90%;
-  padding: 2em 1em 1em;
+  padding: 2em $mobile_side_padding 1em;
   position: relative;
+
+  @media (min-width: 480px) {
+    padding: $desktop_side_padding;
+  }
 }
 
 .logout_btn {
   bottom: 100%;
-  font-size: 1em;
+  font-size: 0.8em;
   margin-bottom: -1em;
-  padding: 0.4em 0.6em;
+  padding: 0.4em 0.9em;
   position: absolute;
   right: 1em;
-  background-color: $secondary;
+  background-color: light(desaturate($purple, 10), 10);
   border-color: $darkPurple;
 }
 
-h1 {
-  font-size: 1.5em;
+/deep/ {
+  h1 {
+    font-size: 1.5em;
+    color: $jellyBean;
+  }
+  h2 {
+    color: $curiousBlue;
+  }
 }
 
 nav {
-  margin: 1em 0 1.5em;
-  border-bottom: 1px solid $greenPigment;
-  color: $darkGreenPigment;
+  margin: 1em (-1 * $mobile_side_padding) 1.5em (-1 * $mobile_side_padding);
+  border-bottom: 1px solid $darkPurple;
+  border-top: 1px solid $darkPurple;
+  background-color: $purple;
+  color: $alabaster;
+  padding-left: $mobile_side_padding;
+  padding-right: $mobile_side_padding;
+  @media (min-width: 480px) {
+    margin-left: -1 * $desktop_side_padding;
+    margin-right: -1 * $desktop_side_padding;
+    padding-left: $desktop_side_padding;
+    padding-right: $desktop_side_padding;
+  }
   ul {
     display: flex;
   }
   li {
     padding: 0.6em 0.8em;
+    position: relative;
+    overflow: hidden;
+    &:before {
+      content: '';
+      display: block;
+      height: 4px;
+      width: 4px;
+      background-color: $alabaster;
+      border-radius: 50%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 3px;
+      margin: auto;
+      transform: scale(0) translateY(100%);
+      transition: transform 0.2s cubic-bezier(.07,1.12,.44,1.49);
+    }
     &.active {
       font-weight: bold;
       font-size: 1.2em;
       line-height: 0.6em;
+      &:before {
+        transform: scale(1) translateY(0%);
+      }
     }
     &:first-child {
       margin-left: -0.8em;
