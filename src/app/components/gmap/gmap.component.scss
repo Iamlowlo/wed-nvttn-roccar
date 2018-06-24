@@ -7,7 +7,6 @@
 .searchbox {
   display: flex;
   flex-direction: column;
-  align-items: center;
   background-color: rgba($onyx, 0.7);
   border-bottom: 1px solid rgba($zorba, 0.7);
   border-right: 1px solid rgba($zorba, 0.7);
@@ -18,6 +17,9 @@
   left: 0;
   overflow: hidden;
   max-height: 1em;
+  max-width: 480px;
+  width: 100%;
+  align-items: stretch;
   transition: max-height 0.3s ease-in;
   &.opened {
     max-height: 104px;
@@ -26,9 +28,8 @@
     }
   }
   input {
-    width: 450px;
     background-color: rgba(white, 0.7);
-
+    flex-grow: 1;
   }
   label {
     color: $jellyBean;
@@ -41,13 +42,21 @@
     padding-left: 1em;
     padding-right: 1em;
   }
-  .sole_input_container {
-    margin-bottom: 0.5em;
-  }
-  .icon-angle-down {
-    color: $alabaster;
-    position: absolute;
-    bottom: 0.5em;
-    transition: transform 0.3s ease-in;
-  }
+}
+.sole_input_container {
+  margin-bottom: 0.5em;
+  margin-top: 0.3em;
+}
+.toggler_container {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0.5em;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.icon-angle-down {
+  display: block;
+  color: $alabaster;
+  transition: transform 0.3s ease-in;
 }
