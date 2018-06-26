@@ -8,8 +8,10 @@
       [formGroup]="searchForm">
     <div class="sole_input_container">
         <input id="address"
+               #address
                type="text"
                name="address"
+               placeholder=""
                formControlName="address"
                (focus)=onFocus($event)
                (blur)=onBlur($event)>

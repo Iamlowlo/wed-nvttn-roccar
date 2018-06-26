@@ -53,7 +53,7 @@
 
   input,
   label {
-    transition: color 0.2s ease-in, border-color 0.2s ease-in;
+    transition: color 0.2s ease-in, border-color 0.2s ease-in, transform 0.2s ease-in;
   }
 
   input {
@@ -83,6 +83,7 @@
 
 label {
   position: absolute;
+  left: 0.4em;
   transition: transform 0.2s ease-in;
   transform-origin: left;
 }
