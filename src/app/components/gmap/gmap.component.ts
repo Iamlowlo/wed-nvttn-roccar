@@ -62,7 +62,7 @@ export class GmapComponent implements OnInit {
           travelMode: google.maps.TravelMode.DRIVING
         }, (response, status: DirectionsStatus | string) => {
           if (status === 'OK') {
-            this.directionsDisplay.setDirections(response); 
+            this.directionsDisplay.setDirections(response);
           } else {
             console.error('Fallo en cargar direcciones');
           }
