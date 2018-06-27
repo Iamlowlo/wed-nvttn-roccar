@@ -10,10 +10,10 @@ import DirectionsStatus = google.maps.DirectionsStatus;
 })
 export class GmapComponent implements OnInit {
   private _latLng: google.maps.LatLng;
+  private _suggestionLatLng: google.maps.LatLng;
   public isSearchboxOpened: Boolean = false;
   public map: google.maps.Map;
   public searchBox: google.maps.places.SearchBox;
-  private origin: google.maps.Marker;
   private destiny: google.maps.Marker;
   private directionsService: google.maps.DirectionsService;
   private directionsDisplay: google.maps.DirectionsRenderer;
@@ -27,6 +27,10 @@ export class GmapComponent implements OnInit {
   @Input()
   private set latLng(latLng: {lat: number, lng: number}) {
     this._latLng = new google.maps.LatLng(latLng.lat, latLng.lng);
+  }
+  @Input()
+  private set suggestion(latLng: {lat: number, lng: number}) {
+    this._suggestionLatLng = new google.maps.LatLng(latLng.lat, latLng.lng);
   }
   @Input()
   public set height(height: string) { this._height = height; }
@@ -68,43 +72,6 @@ export class GmapComponent implements OnInit {
           }
         });
       }
-      // Clear out the old markers.
-      // markers.forEach(function(marker) {
-      //   marker.setMap(null);
-      // });
-      // markers = [];
-
-      // For each place, get the icon, name and location.
-      // const bounds = new google.maps.LatLngBounds();
-      // places.forEach(function(place) {
-      //   if (!place.geometry) {
-      //     console.log('Returned place contains no geometry');
-      //     return;
-      //   }
-      //   var icon = {
-      //     url: place.icon,
-      //     size: new google.maps.Size(71, 71),
-      //     origin: new google.maps.Point(0, 0),
-      //     anchor: new google.maps.Point(17, 34),
-      //     scaledSize: new google.maps.Size(25, 25)
-      //   };
-      //
-      //   // Create a marker for each place.
-      //   markers.push(new google.maps.Marker({
-      //     map: map,
-      //     icon: icon,
-      //     title: place.name,
-      //     position: place.geometry.location
-      //   }));
-      //
-      //   if (place.geometry.viewport) {
-      //     // Only geocodes have viewport.
-      //     bounds.union(place.geometry.viewport);
-      //   } else {
-      //     bounds.extend(place.geometry.location);
-      //   }
-      // });
-      // map.fitBounds(bounds);
     });
   }
   toggleSearchbox() {
