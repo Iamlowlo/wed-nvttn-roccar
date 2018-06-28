@@ -1,7 +1,7 @@
 @import "~_variables.scss";
 
 .btn {
-  font-family: 'Passion One', "Arial Black", sans-serif;
+  font-family: $rubik;
   color:  $alabaster;
   padding: 0.7em 1.7em;
   border-width: 1px;
@@ -16,6 +16,15 @@
     border-color: darken($primary, 10);
     &:hover {
       background-color: desaturate(lighten($primary, 5), 10);
+    }
+  }
+
+  &-secondary {
+    background-color: $alabaster;
+    border-color: $jellyBean;
+    color: $curiousBlue;
+    &:hover {
+      background-color: desaturate(lighten($jellyBean, 50), 20);
     }
   }
 

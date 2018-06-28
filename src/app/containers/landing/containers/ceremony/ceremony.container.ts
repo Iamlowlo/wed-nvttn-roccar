@@ -12,8 +12,8 @@ export class CeremonyContainer implements OnInit, OnDestroy {
   private subscription: Subscription;
   public userData: User;
   public ceremonyAddress = {
-    lat: 40.3929116,
-    lng: -3.7013951
+    lat: 40.393525,
+    lng: -3.7000989
   };
   constructor(private db: AngularFireDatabase) {
     this.subscription = this.db.object('guests/' + window.localStorage.getItem('uid'))

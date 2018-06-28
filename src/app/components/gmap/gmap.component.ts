@@ -3,6 +3,14 @@ import { } from '@types/googlemaps';
 import {FormControl, FormGroup} from '@angular/forms';
 import DirectionsStatus = google.maps.DirectionsStatus;
 
+interface Suggestion {
+  label: string;
+  coords: {
+    lat: number;
+    lng: number;
+  };
+}
+
 @Component({
   selector: 'app-gmap',
   templateUrl: './gmap.component.html',
@@ -10,6 +18,7 @@ import DirectionsStatus = google.maps.DirectionsStatus;
 })
 export class GmapComponent implements OnInit {
   private _latLng: google.maps.LatLng;
+  private _suggestion: Suggestion;
   private _suggestionLatLng: google.maps.LatLng;
   public isSearchboxOpened: Boolean = false;
   public map: google.maps.Map;
@@ -17,6 +26,7 @@ export class GmapComponent implements OnInit {
   private destiny: google.maps.Marker;
   private directionsService: google.maps.DirectionsService;
   private directionsDisplay: google.maps.DirectionsRenderer;
+  private geocoder: google.maps.Geocoder;
   public _height = '500px';
   public _width = '100%';
   public searchForm = new FormGroup({
@@ -29,9 +39,11 @@ export class GmapComponent implements OnInit {
     this._latLng = new google.maps.LatLng(latLng.lat, latLng.lng);
   }
   @Input()
-  private set suggestion(latLng: {lat: number, lng: number}) {
-    this._suggestionLatLng = new google.maps.LatLng(latLng.lat, latLng.lng);
+  public set suggestion(suggestion: Suggestion) {
+    this._suggestion = suggestion;
+    this._suggestionLatLng = new google.maps.LatLng(suggestion.coords.lat, suggestion.coords.lng);
   }
+  public get suggestion(): Suggestion { return this._suggestion; }
   @Input()
   public set height(height: string) { this._height = height; }
   public get height(): string { return this._height; }
@@ -41,6 +53,7 @@ export class GmapComponent implements OnInit {
 
   constructor() {
     this.directionsService = new google.maps.DirectionsService;
+    this.geocoder = new google.maps.Geocoder;
   }
 
   ngOnInit() {
@@ -84,6 +97,14 @@ export class GmapComponent implements OnInit {
 
   onBlur($event) {
     $event.target.classList.remove('ng-focused');
+  }
+
+  setOriginFromSuggestion() {
+    console.log('PONG');
+    this.geocoder.geocode({location: this._suggestionLatLng}, (result, status) => {
+      console.log('result', result);
+      console.log('status', status);
+    });
   }
 
 }
