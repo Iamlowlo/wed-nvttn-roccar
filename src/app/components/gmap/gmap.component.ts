@@ -72,11 +72,20 @@ export class GmapComponent implements OnInit {
     this.directionsDisplay = new google.maps.DirectionsRenderer({map: this.map});
 
     this.searchBox.addListener('places_changed', () => {
-      this.requestDirections();
+
+      const places = this.searchBox.getPlaces();
+      if (places.length > 0 && places[0].geometry) {
+        this.requestDirections(places[0].geometry.location);
+
+      }
     });
   }
   toggleSearchbox() {
     this.isSearchboxOpened = !this.isSearchboxOpened;
+    if (!this.isSearchboxOpened) {
+      this.searchForm.controls.address.setValue('');
+      this.searchForm.controls.address.markAsUntouched();
+    }
   }
 
   onFocus($event) {
@@ -87,11 +96,9 @@ export class GmapComponent implements OnInit {
     $event.target.classList.remove('ng-focused');
   }
 
-  requestDirections() {
-    const places = this.searchBox.getPlaces();
-    if (places.length > 0 && places[0].geometry) {
+  requestDirections(location) {
       this.directionsService.route({
-        origin: places[0].geometry.location,
+        origin: location,
         destination: this._latLng,
         travelMode: google.maps.TravelMode.DRIVING
       }, (response, status: DirectionsStatus | string) => {
@@ -101,11 +108,9 @@ export class GmapComponent implements OnInit {
           console.error('Fallo en cargar direcciones');
         }
       });
-    }
   }
 
   setOriginFromSuggestion() {
-    console.log('PING');
     if (!this.isRequesting) {
       this.isRequesting = true;
       this.geocoder.geocode({location: this._suggestionLatLng}, (result, status: GeocoderStatus | string) => {
@@ -116,6 +121,8 @@ export class GmapComponent implements OnInit {
           this.searchForm.setValue({
               address: result[0].formatted_address
           });
+          console.log('PONG')
+          this.requestDirections(this._suggestionLatLng);
         }
       });
     }

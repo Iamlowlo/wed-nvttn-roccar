@@ -27,4 +27,5 @@
 <div class="suggestion btn btn-secondary"
      *ngIf="!!suggestion"
      (click)="setOriginFromSuggestion()"
->¿Ir desde {{suggestion.label}}?</div>
+><span *ngIf="!isRequesting; else showLoader">¿Ir desde {{suggestion.label}}?</span>
+    <ng-template #showLoader></ng-template><img src="#" alt="loader"></div>
