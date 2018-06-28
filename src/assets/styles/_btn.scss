@@ -20,11 +20,11 @@
   }
 
   &-secondary {
-    background-color: $alabaster;
+    background-color: desaturate(lighten($jellyBean, 60), 20);
     border-color: $jellyBean;
     color: $curiousBlue;
     &:hover {
-      background-color: desaturate(lighten($jellyBean, 50), 20);
+      background-color: desaturate(lighten($jellyBean, 55), 20);
     }
   }
 

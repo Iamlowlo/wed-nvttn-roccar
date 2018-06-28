@@ -16,7 +16,9 @@
                (focus)=onFocus($event)
                (blur)=onBlur($event)>
         <label for="address">¿Desde dónde vas a venir?</label>
-        <button type="button" class="btn btn-primary icon-search"></button>
+        <button type="button"
+                class="btn btn-primary icon-search"
+                (click)="requestDirections()"></button>
     </div>
     <div class="toggler_container" (click)="toggleSearchbox()">
         <i class="icon-angle-down"></i>

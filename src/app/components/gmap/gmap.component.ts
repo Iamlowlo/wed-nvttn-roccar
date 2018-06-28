@@ -2,6 +2,7 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { } from '@types/googlemaps';
 import {FormControl, FormGroup} from '@angular/forms';
 import DirectionsStatus = google.maps.DirectionsStatus;
+import GeocoderStatus = google.maps.GeocoderStatus;
 
 interface Suggestion {
   label: string;
@@ -21,6 +22,7 @@ export class GmapComponent implements OnInit {
   private _suggestion: Suggestion;
   private _suggestionLatLng: google.maps.LatLng;
   public isSearchboxOpened: Boolean = false;
+  public isRequesting: Boolean = false;
   public map: google.maps.Map;
   public searchBox: google.maps.places.SearchBox;
   private destiny: google.maps.Marker;
@@ -70,21 +72,7 @@ export class GmapComponent implements OnInit {
     this.directionsDisplay = new google.maps.DirectionsRenderer({map: this.map});
 
     this.searchBox.addListener('places_changed', () => {
-      const places = this.searchBox.getPlaces();
-
-      if (places.length > 0 && places[0].geometry) {
-        this.directionsService.route({
-          origin: places[0].geometry.location,
-          destination: this._latLng,
-          travelMode: google.maps.TravelMode.DRIVING
-        }, (response, status: DirectionsStatus | string) => {
-          if (status === 'OK') {
-            this.directionsDisplay.setDirections(response);
-          } else {
-            console.error('Fallo en cargar direcciones');
-          }
-        });
-      }
+      this.requestDirections();
     });
   }
   toggleSearchbox() {
@@ -99,12 +87,38 @@ export class GmapComponent implements OnInit {
     $event.target.classList.remove('ng-focused');
   }
 
+  requestDirections() {
+    const places = this.searchBox.getPlaces();
+    if (places.length > 0 && places[0].geometry) {
+      this.directionsService.route({
+        origin: places[0].geometry.location,
+        destination: this._latLng,
+        travelMode: google.maps.TravelMode.DRIVING
+      }, (response, status: DirectionsStatus | string) => {
+        if (status === 'OK') {
+          this.directionsDisplay.setDirections(response);
+        } else {
+          console.error('Fallo en cargar direcciones');
+        }
+      });
+    }
+  }
+
   setOriginFromSuggestion() {
-    console.log('PONG');
-    this.geocoder.geocode({location: this._suggestionLatLng}, (result, status) => {
-      console.log('result', result);
-      console.log('status', status);
-    });
+    console.log('PING');
+    if (!this.isRequesting) {
+      this.isRequesting = true;
+      this.geocoder.geocode({location: this._suggestionLatLng}, (result, status: GeocoderStatus | string) => {
+        this.isRequesting = false;
+        if (status === 'OK') {
+          this.isSearchboxOpened = true;
+          this.searchForm.controls.address.markAsTouched()
+          this.searchForm.setValue({
+              address: result[0].formatted_address
+          });
+        }
+      });
+    }
   }
 
 }
