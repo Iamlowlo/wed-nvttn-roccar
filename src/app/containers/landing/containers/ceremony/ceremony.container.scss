@@ -1,9 +1,11 @@
 @import "~_variables.scss";
 
 .img_container {
-  img {
-    max-width: 100%;
-  }
+  margin-top: 2em;
+  background-image: url('/assets/casa_del_reloj_1200.jpg');
+  width: 1102px;
+  height: 826px;
+  background-size: cover;
 }
 
 .intro {
