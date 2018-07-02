@@ -80,9 +80,14 @@ export class GmapComponent implements OnInit {
       }
     });
   }
-  toggleSearchbox() {
+  toggleSearchbox(addressValue?) {
     this.isSearchboxOpened = !this.isSearchboxOpened;
-    if (!this.isSearchboxOpened) {
+    if (!!addressValue) {
+      this.searchForm.controls.address.markAsTouched()
+      this.searchForm.setValue({
+        address: addressValue
+      });
+    } else {
       this.searchForm.controls.address.setValue('');
       this.searchForm.controls.address.markAsUntouched();
     }
@@ -116,12 +121,7 @@ export class GmapComponent implements OnInit {
       this.geocoder.geocode({location: this._suggestionLatLng}, (result, status: GeocoderStatus | string) => {
         this.isRequesting = false;
         if (status === 'OK') {
-          this.isSearchboxOpened = true;
-          this.searchForm.controls.address.markAsTouched()
-          this.searchForm.setValue({
-              address: result[0].formatted_address
-          });
-          console.log('PONG')
+          this.toggleSearchbox(result[0].formatted_address);
           this.requestDirections(this._suggestionLatLng);
         }
       });

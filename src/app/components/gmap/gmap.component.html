@@ -28,4 +28,4 @@
      *ngIf="!!suggestion"
      (click)="setOriginFromSuggestion()"
 ><span *ngIf="!isRequesting; else showLoader">¿Ir desde {{suggestion.label}}?</span>
-    <ng-template #showLoader></ng-template><img src="#" alt="loader"></div>
+    <ng-template #showLoader><img src="#" alt="loader"></ng-template></div>
