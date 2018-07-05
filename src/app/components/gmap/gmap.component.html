@@ -24,8 +24,8 @@
         <i class="icon-angle-down"></i>
     </div>
 </form>
-<div class="suggestion btn btn-secondary"
+<div class="suggestion btn"
      *ngIf="!!suggestion"
      (click)="setOriginFromSuggestion()"
 ><span *ngIf="!isRequesting; else showLoader">¿Ir desde {{suggestion.label}}?</span>
-    <ng-template #showLoader><img src="#" alt="loader"></ng-template></div>
+    <ng-template #showLoader><img src="assets/starwars_loader.gif" alt="loader"></ng-template></div>

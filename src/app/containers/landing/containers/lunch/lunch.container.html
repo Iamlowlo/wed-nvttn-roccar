@@ -16,8 +16,12 @@
     </div>
     <div class="info">
         <h2>¿Qué me voy a comer?</h2>
-        <p>Aquí tienes el menú:</p>
-        <ol class="menu">
+        <p class="menu-dropdown-control"
+           [ngClass]="{'opened': isMenuOpen}"
+           (click)="toggleDropdown()">Aquí tienes el menú: <i class="icon-angle-down"></i></p>
+        <ol *ngIf="isMenuOpen"
+            [@dropDown]="{value:'*', params:{duration: 500}}"
+            class="menu">
             <li class="menu-course-container">
                 <article class="menu-course">
                     <h1 class="menu-course-title">Aperitivo</h1>

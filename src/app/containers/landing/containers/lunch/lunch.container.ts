@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {dropDown} from '../../../../app.animations';
 
 @Component({
   selector: 'app-lunch',
   templateUrl: './lunch.container.html',
-  styleUrls: ['./lunch.container.scss']
+  styleUrls: ['./lunch.container.scss'],
+  animations: [dropDown]
 })
 export class LunchContainer implements OnInit {
   public lunchAddress = {
@@ -18,10 +20,15 @@ export class LunchContainer implements OnInit {
     label: 'la ceremonia',
     coords: this.ceremonyAddress
   };
+  public isMenuOpen: Boolean = false;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  toggleDropdown() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
 }

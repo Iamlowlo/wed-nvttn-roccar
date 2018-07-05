@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { } from '@types/googlemaps';
 import {FormControl, FormGroup} from '@angular/forms';
 import DirectionsStatus = google.maps.DirectionsStatus;
@@ -15,7 +15,8 @@ interface Suggestion {
 @Component({
   selector: 'app-gmap',
   templateUrl: './gmap.component.html',
-  styleUrls: ['./gmap.component.scss']
+  styleUrls: ['./gmap.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GmapComponent implements OnInit {
   private _latLng: google.maps.LatLng;
@@ -53,7 +54,7 @@ export class GmapComponent implements OnInit {
   public set width(width: string) { this._width = width || '100%'; }
   public get width(): string { return this._width; }
 
-  constructor() {
+  constructor(private changeDetectorReg: ChangeDetectorRef) {
     this.directionsService = new google.maps.DirectionsService;
     this.geocoder = new google.maps.Geocoder;
   }
@@ -82,6 +83,7 @@ export class GmapComponent implements OnInit {
   }
   toggleSearchbox(addressValue?) {
     this.isSearchboxOpened = !this.isSearchboxOpened;
+    this.changeDetectorReg.detectChanges();
     if (!!addressValue) {
       this.searchForm.controls.address.markAsTouched()
       this.searchForm.setValue({
@@ -92,6 +94,7 @@ export class GmapComponent implements OnInit {
       this.searchForm.controls.address.markAsUntouched();
     }
   }
+
 
   onFocus($event) {
     $event.target.classList.add('ng-focused');
