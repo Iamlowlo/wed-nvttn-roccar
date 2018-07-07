@@ -1,5 +1,5 @@
 <div #gmap
-     class="test"
+     class="gmap-container"
     [style.width]="width"
     [style.height]="height"></div>
 <form class="searchbox"
@@ -16,9 +16,6 @@
                (focus)=onFocus($event)
                (blur)=onBlur($event)>
         <label for="address">¿Desde dónde vas a venir?</label>
-        <button type="button"
-                class="btn btn-primary icon-search"
-                (click)="requestDirections()"></button>
     </div>
     <div class="toggler_container" (click)="toggleSearchbox()">
         <i class="icon-angle-down"></i>

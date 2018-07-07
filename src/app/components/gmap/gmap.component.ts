@@ -83,9 +83,8 @@ export class GmapComponent implements OnInit {
   }
   toggleSearchbox(addressValue?) {
     this.isSearchboxOpened = !this.isSearchboxOpened;
-    this.changeDetectorReg.detectChanges();
     if (!!addressValue) {
-      this.searchForm.controls.address.markAsTouched()
+      this.searchForm.controls.address.markAsTouched();
       this.searchForm.setValue({
         address: addressValue
       });
@@ -93,6 +92,7 @@ export class GmapComponent implements OnInit {
       this.searchForm.controls.address.setValue('');
       this.searchForm.controls.address.markAsUntouched();
     }
+    this.changeDetectorReg.detectChanges();
   }
 
 
