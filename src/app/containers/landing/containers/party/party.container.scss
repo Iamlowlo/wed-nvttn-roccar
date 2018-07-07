@@ -1,0 +1,114 @@
+@import "~_variables.scss";
+
+.intro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  div, img {
+    width: 100%;
+  }
+  button {
+    position: absolute;
+    right: 0.7em;
+    bottom: 2em;
+  }
+  @media (min-width: 480px) {
+    flex-direction: row;
+    div, img {
+      width: 50%;
+    }
+    div {
+      padding-right: 2em;
+    }
+  }
+}
+
+.costumes-avoided {
+  display: flex;
+  margin-bottom: 2em;
+  li {
+    position: relative;
+    width: 50%;
+    max-width: 320px;
+    &:nth-child(even) {
+      margin-left: 1em;
+    }
+    &:nth-child(odd) {
+      margin-right: 1em;
+    }
+  }
+  img {
+    display: block;
+    width: 100%;
+  }
+  span, i {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: $crimson;
+  }
+  span {
+    font-size: 6em;
+    line-height: 0.8em;
+    font-family: $rubik;
+    font-weight: bold;
+    animation-name: showHide;
+    animation-iteration-count: infinite;
+    animation-duration: 3000ms;
+  }
+  i {
+    font-size: 16em;
+    top: 0;
+    left: 0;
+    margin: auto;
+    height: 1em;
+    width: 1em;
+    animation-name: hideShow;
+    animation-iteration-count: infinite;
+    animation-duration: 3000ms;
+  }
+}
+
+.costume-gallery {
+  display: flex;
+  overflow: auto;
+  margin-top: 1em;
+  li {
+    &:not(:first-child) {
+      margin-left: 0.5em;
+    }
+    &:not(:last-child) {
+      margin-right: 0.5em;
+    }
+  }
+}
+
+@keyframes showHide {
+  0% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hideShow {
+  0% {
+    opacity: 0;
+  }
+  45% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
