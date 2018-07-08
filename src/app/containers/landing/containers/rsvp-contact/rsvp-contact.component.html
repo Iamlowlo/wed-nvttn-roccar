@@ -1,0 +1,99 @@
+<section>
+    <header>
+        <h1>¿Vas a poder acompañarnos?</h1>
+    </header>
+    <div class="intro">
+        <p>Para que la operación de la resistencia llegue a buen término necesitamos planificarla al detalle, por lo que necesitamos que nos confirmes si vamos a poder contar contigo o no.</p>
+    </div>
+    <div class="info">
+        <h2>Répondez s'il vous plaît</h2>
+        <form [formGroup]="rsvpForm">
+            <ul class="rsvp-opt-group">
+                <li *ngIf="rsvpForm.controls.ceremony" class="input_list input_list__radio">
+                    <h3 class="input_list__radio-title">Ceremonia</h3>
+                    <label for="ceremony_yes"
+                           class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__affirmative"
+                           [ngClass]="{'active': rsvpForm.get('ceremony').value === true}">
+                        <i class="icon-rebel"></i>
+                        <span>Si</span>
+                        <input type="radio"
+                               id="ceremony_yes"
+                               formControlName="ceremony"
+                               [value]="true">
+                    </label>
+                    <label for="ceremony_no"
+                           class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__negative"
+                           [ngClass]="{'active': rsvpForm.get('ceremony').value === false}">
+                        <i class="icon-empire"></i>
+                        <span>No</span>
+                        <input type="radio"
+                                id="ceremony_no"
+                                formControlName="ceremony"
+                                [value]="false"></label>
+                </li>
+                <li *ngIf="rsvpForm.controls.lunch" class="input_list input_list__radio">
+                    <h3 class="input_list__radio-title">Comida</h3>
+                    <label for="lunch_yes"
+                           class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__affirmative"
+                           [ngClass]="{'active': rsvpForm.get('lunch').value === true}">
+                        <i class="icon-rebel"></i>
+                        <span>Si</span>
+                        <input type="radio"
+                               id="lunch_yes"
+                               formControlName="lunch"
+                               [value]="true">
+                    </label>
+                    <label for="lunch_no"
+                           class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__negative"
+                           [ngClass]="{'active': rsvpForm.get('lunch').value === false}">
+                        <i class="icon-empire"></i>
+                        <span>No</span>
+                        <input type="radio"
+                               id="lunch_no"
+                               formControlName="lunch"
+                               [value]="false">
+                    </label>
+                </li>
+                <li *ngIf="rsvpForm.controls.party" class="input_list input_list__radio">
+                    <h3 class="input_list__radio-title">Fiesta</h3>
+                    <label for="party_yes"
+                           class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__affirmative"
+                           [ngClass]="{'active': rsvpForm.get('party').value === true}">
+                        <i class="icon-rebel"></i>
+                        <span>Si</span>
+                        <input type="radio"
+                               id="party_yes"
+                               formControlName="party"
+                               [value]="true">
+                    </label>
+                    <label for="party_no"
+                           class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__negative"
+                           [ngClass]="{'active': rsvpForm.get('party').value === false}">
+                        <i class="icon-empire"></i>
+                        <span>No</span>
+                        <input type="radio"
+                               id="party_no"
+                               formControlName="party"
+                               [value]="false">
+                    </label>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div class="info">
+        <h2>Contacta con nosotros</h2>
+        <p>Si tienes alguna duda aquí tienes nuestros datos:</p>
+        <ul class="contact-info">
+            <li>
+                <h3>Rocío</h3>
+                <b>Teléfono:</b> 659743684<br>
+                <b>Email:</b> rocioviola@hotmail.es
+            </li>
+            <li>
+                <h3>Carlos</h3>
+                <b>Teléfono:</b> 687267598<br>
+                <b>Email:</b> ck_ronin86@hotmail.com
+            </li>
+        </ul>
+    </div>
+</section>

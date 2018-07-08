@@ -16,6 +16,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   public introStep: number;
   private subscriptions: Array<Subscription>;
   public starField: Starfield;
+  @ViewChild('audio') audio: ElementRef;
 
   constructor(private router: Router, private element: ElementRef) {
     this.subscriptions = [];
@@ -43,6 +44,12 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+  playAudio(event) {
+    if (event.toState === 'void') {
+      console.log('asdasd')
+      this.audio.nativeElement.play();
+    }
   }
 
   animationStepper(event, toState, stepTriggered, delay) {

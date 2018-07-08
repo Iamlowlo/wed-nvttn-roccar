@@ -6,12 +6,16 @@ $desktop_side_padding: 3em;
 :host {
   display: block;
   position: relative;
-  margin-top: 3.2em;
+  margin-top: 2em;
   margin-bottom: 3.2em;
+  @media (min-width: 480px) {
+    margin-top: 3.2em;
+  }
 }
 
 .main-wrapper{
-  max-width: 1200px;
+  max-width: 96vw;
+  width: 1200px;
   padding: 2em $mobile_side_padding 1em;
   position: relative;
 

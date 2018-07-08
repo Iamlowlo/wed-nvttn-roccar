@@ -26,6 +26,9 @@
     &:hover {
       background-color: desaturate(lighten($jellyBean, 55), 20);
     }
+    &.active {
+      background-color: desaturate(lighten($jellyBean, 50), 0);
+    }
   }
 
   &-transp {

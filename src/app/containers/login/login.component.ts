@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs/Observable';
-import {FirebaseListObservable} from 'angularfire2/database-deprecated';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import {Subscription} from 'rxjs/Subscription';

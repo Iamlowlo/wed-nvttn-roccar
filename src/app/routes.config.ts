@@ -6,6 +6,7 @@ import {LandingComponent} from './containers/landing/landing.component';
 import {CeremonyContainer} from './containers/landing/containers/ceremony/ceremony.container';
 import {LunchContainer} from './containers/landing/containers/lunch/lunch.container';
 import {PartyContainer} from './containers/landing/containers/party/party.container';
+import {RSVPContactComponent} from './containers/landing/containers/rsvp-contact/rsvp-contact.component';
 
 export const AppRoutes: Routes = [
     {
@@ -39,6 +40,10 @@ export const AppRoutes: Routes = [
           {
             path: 'fiesta',
             component: PartyContainer
+          },
+          {
+            path: 'rsvp-contacto',
+            component: RSVPContactComponent
           }
         ]
     }

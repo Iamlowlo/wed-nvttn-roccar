@@ -2,19 +2,25 @@
    [@fadeIn]="{value:'*', params:{duration: 500}}"
    [@fadeOut]="{value:'*', params:{duration: 500}}"
    (@fadeIn.done)="animationStepper($event, '*', 1, 4000)"
+   (@fadeOut.done)="playAudio($event)"
    class="intro_text centered">Hace mucho tiempo, en una dehesa<br>muy, muy lejana....</p>
 <img *ngIf="introStep === 2"
-     [@logoStarWars]="{value:'*', params:{duration_in: 500, duration_shrink: 6000}}"
+     [@logoStarWars]="{value:'*', params:{
+        duration_in: 1000,
+        duration_shrink: 6500,
+        delay: 500
+     }}"
      (@logoStarWars.done)="animationStepper($event, '*', 2, 0)"
      class="starWars_logo"
      src="assets/star-wars.svg" alt="">
 <div *ngIf="introStep === 3"
      [@textCrawl]="{
         value:'*',
-        params:{duration_leave: 25000,
-        delay_leave: 2500,
-        duration_fade: 5000,
-        delay_fade: 21000
+        params:{
+            duration_leave: 45000,
+            delay_leave: 1500,
+            duration_fade: 7000,
+            delay_fade: 38000
         }}"
      (@textCrawl.done)="animationEnded()"
      class="intro_crawl">
@@ -24,8 +30,10 @@
   <p>En una contundente jugada, después de 10 kilómetros de esfuerzo, Descerebrado se armó de valor y Pequeñita, exhausta dijo sí.</p>
   <p>Juntos han decidido celebrar su unión y contar contigo en una misión concreta...</p>
 </div>
+
 <button *ngIf="showSkip"
         [@fadeIn]
         [routerLink]="['/landing']"
         class="btn btn-transp skip_btn"
         type="button">Saltar</button>
+<audio #audio src="assets/StarWarsIntro.mp3"></audio>

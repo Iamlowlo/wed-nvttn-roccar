@@ -23,6 +23,31 @@
   height: 2.5em;
   overflow: hidden;
   transition: height 0.2s ease-in;
+  &__radio {
+    height: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0;
+    margin-bottom: 0;
+    label {
+      position: static;
+    }
+    &-title {
+      margin-bottom: 0.2em;
+      width: 100%;
+    }
+    &-opt {
+      display: flex;
+      flex-direction: column;
+      input {
+        display: none;
+      }
+      &:not(:last-child) {
+        margin-right: 1em;
+      }
+    }
+  }
+
   &:last-child {
     margin-bottom: 2em;
   }
