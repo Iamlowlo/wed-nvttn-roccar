@@ -35,6 +35,11 @@ export class LandingComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
+  logOut() {
+    this.afAuth.auth.signOut();
+    window.localStorage.clear();
+  }
+
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();

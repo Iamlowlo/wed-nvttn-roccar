@@ -1,3 +1,6 @@
+<canvas #starfield
+        [ngClass]="{'shown': showStarfield}"
+        class="starfield"></canvas>
 <p *ngIf="introStep === 1"
    [@fadeIn]="{value:'*', params:{duration: 500}}"
    [@fadeOut]="{value:'*', params:{duration: 500}}"

@@ -53,11 +53,6 @@ export class AppComponent implements OnDestroy {
       );
   }
 
-  logOut() {
-      this.afAuth.auth.signOut();
-      window.localStorage.clear();
-  }
-
   ngOnDestroy() {
       this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }

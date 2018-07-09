@@ -11,7 +11,10 @@ import * as Starfield from 'canvas-starfield';
   animations: [fadeIn, fadeOut, logoStarWars, textCrawl]
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
+
+  @ViewChild('starfield') starfield: ElementRef;
   public appData;
+  public showStarfield: boolean;
   public showSkip: boolean;
   public introStep: number;
   private subscriptions: Array<Subscription>;
@@ -26,20 +29,24 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.starField = new Starfield({
-    //   canvas: 'app-welcome',
-    //   numStars: 800,
-    //   dx: 0,
-    //   dy: 0,
-    //   maxRadius: 2
-    // });
+    this.starField = new Starfield({
+      canvas: this.starfield.nativeElement,
+      numStars: 800,
+      dx: 0.000001,
+      dy: 15,
+      maxRadius: 1
+    });
+    this.starField.start();
 
     setTimeout(() => {
       this.introStep = 1;
     }, 1000);
     setTimeout(() => {
+      this.showStarfield = true;
+    }, 4000);
+    setTimeout(() => {
       this.showSkip = true;
-    }, 2000);
+    }, 7000);
   }
 
   ngOnDestroy() {
