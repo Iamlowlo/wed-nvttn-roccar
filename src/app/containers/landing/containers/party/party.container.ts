@@ -38,11 +38,12 @@ export class PartyContainer implements OnInit {
        ? _galleryImages[activeImageIdx - 1].offsetLeft === _galleryContainer.scrollLeft
           ? activeImageIdx - 2
           : activeImageIdx - 1
-       : 0;
-      console.log('goToIdx', goToIdx);
+       : activeImageIdx === -1
+          ? _galleryImages.length - 2
+          : 0;
     }
     if (direction === 'next') {
-      goToIdx = activeImageIdx <= _galleryImages.length - 1
+      goToIdx = activeImageIdx <= _galleryImages.length - 1 && activeImageIdx !== -1
         ? activeImageIdx
         : _galleryImages.length - 1;
     }

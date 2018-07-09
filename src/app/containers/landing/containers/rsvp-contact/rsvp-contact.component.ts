@@ -19,7 +19,6 @@ export class RSVPContactComponent implements OnInit {
       .valueChanges()
       .subscribe((userData: User) => {
         this.userData = userData;
-        console.log('userData', userData);
         const formControls = Object.assign({
           ceremony: new FormControl( '', Validators.required)
         },
