@@ -114,7 +114,7 @@ nav {
   right: 0;
   width: 220px;
   transition: transform 0.3s cubic-bezier(.07,1.12,.44,1.49);
-  transform: translateY(140px);
+  transform: translateY(calc(100% - 40px));
   &.opened {
     transform: translateY(0);
     p i {
@@ -142,6 +142,20 @@ nav {
     margin-bottom: 0;
     .input_list {
       padding-top: 0;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    .input_list__radio-title {
+      font-size: 1.1em;
+    }
+    @media (max-width: 480px) {
+      .rsvp-opt {
+        font-size: 1em;
+        i {
+          font-size: 1.2em;
+        }
+      }
     }
   }
 }
