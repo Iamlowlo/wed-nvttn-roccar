@@ -82,13 +82,14 @@ export class GmapComponent implements OnInit {
     });
   }
   toggleSearchbox(addressValue?) {
-    this.isSearchboxOpened = !this.isSearchboxOpened;
     if (!!addressValue) {
+      this.isSearchboxOpened = true;
       this.searchForm.controls.address.markAsTouched();
       this.searchForm.setValue({
         address: addressValue
       });
     } else {
+      this.isSearchboxOpened = false;
       this.searchForm.controls.address.setValue('');
       this.searchForm.controls.address.markAsUntouched();
     }

@@ -10,6 +10,11 @@
   cursor: pointer;
   font-weight: $medium;
   transition: background-color 0.2s ease-in;
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #30383b;
+  }
 
   &-primary {
     background-color: $primary;

@@ -3,7 +3,6 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {AngularFireDatabase} from 'angularfire2/database';
 import {User} from '../models/user.model';
 import {Observable} from 'rxjs/Observable';
-import {AngularFireAuth} from 'angularfire2/auth';
 
 @Injectable()
 export class IsInvitedGuardService implements  CanActivate {
@@ -11,18 +10,30 @@ export class IsInvitedGuardService implements  CanActivate {
     constructor(private db: AngularFireDatabase, private router: Router) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-        console.log(this.db.object('/guests/' + window.localStorage.getItem('uid')));
-        return true;
-       /* return this.db.database.map(auth => {
-            console.log('auth', auth);
-            if (auth ===  null || auth === undefined) {
-                this.router.navigate(['/login']);
-                return false;
-            } else {
-                return true;
+        return this.db.object('/guests/' + window.localStorage.getItem('uid'))
+          .valueChanges().map( (data: User) => {
+            console.log('route', route);
+            console.log('state', state);
+            console.log('data', data);
+            let isInvited = false;
+            switch (state.url) {
+              case '/landing/ceremonia':
+                isInvited = true;
+                break;
+              case '/landing/comida':
+                isInvited = !!data.lunch;
+                break;
+              case '/landing/fiesta':
+                isInvited = !!data.party;
+                break;
             }
-        });
-        */
+            if (isInvited) {
+              return true;
+            } else {
+              this.router.navigate(['/landing/ceremonia']);
+              return false;
+            }
+          });
     }
 
 }

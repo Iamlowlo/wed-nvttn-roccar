@@ -43,7 +43,8 @@ export const AppRoutes: Routes = [
           },
           {
             path: 'fiesta',
-            component: PartyContainer
+            component: PartyContainer,
+            canActivate: [IsInvitedGuardService]
           },
           {
             path: 'rsvp-contacto',
