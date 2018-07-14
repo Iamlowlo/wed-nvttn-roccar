@@ -22,6 +22,7 @@
         <ol *ngIf="isMenuOpen"
             [@dropDown]="{value:'*', params:{duration: 500}}"
             class="menu">
+            <ng-template [ngIf]="!userData.isKid">
             <li class="menu-course-container">
                 <article class="menu-course">
                     <h1 class="menu-course-title">Aperitivo</h1>
@@ -69,6 +70,44 @@
                     </ul>
                 </article>
             </li>
+            </ng-template>
+            <ng-template [ngIf]="userData.isKid">
+            <li class="menu-course-container">
+                <article class="menu-course">
+                    <h1 class="menu-course-title">Aperitivo</h1>
+                    <ul>
+                        <li class="menu-course-dish">Croquetas de jamón</li>
+                        <li class="menu-course-dish">Txistorra frita de Orio</li>
+                    </ul>
+                </article>
+            </li>
+            <li class="menu-course-container">
+                <article class="menu-course">
+                    <h1 class="menu-course-title">Platos principales</h1>
+                    <ul>
+                        <li class="menu-course-dish">Pintxo amona</li>
+                        <li class="menu-course-dish">Pintxo tortilla de patatas</li>
+                        <li class="menu-course-dish">Ensalada</li>
+                    </ul>
+                </article>
+            </li>
+            <li class="menu-course-container">
+                <article class="menu-course">
+                    <h1 class="menu-course-title">Postre</h1>
+                    <ul>
+                        <li class="menu-course-dish">Helado casero</li>
+                    </ul>
+                </article>
+            </li>
+            <li class="menu-course-container">
+                <article class="menu-course">
+                    <h1 class="menu-course-title">Bebidas</h1>
+                    <ul>
+                        <li class="menu-course-dish">Agua mineral y refresco</li>
+                    </ul>
+                </article>
+            </li>
+            </ng-template>
         </ol>
     </div>
     <div class="info">

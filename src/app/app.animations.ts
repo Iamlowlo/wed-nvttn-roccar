@@ -81,6 +81,31 @@ export const fadeOut = trigger('fadeOut', [
   )
 ]);
 
+export const routerTransition = trigger('routerTransition', [
+  transition(
+    ':enter',
+    [
+      style( {opacity: 0, position: 'absolute', width: '100%', transform: 'translateY(100%)'}),
+      animate(
+        '{{duration}}ms {{delay}}ms ease-in-out',
+        style( {opacity: 1, transform: 'translateY(0%)'})
+      )
+    ],
+    { params: { duration: defaultDuration, delay: defaultDelay } }
+  ),
+  transition(
+    ':leave',
+    [
+      style( {opacity: 1, position: 'absolute', width: '100%', transform: 'translateY(0%)'}),
+      animate(
+        '{{duration}}ms {{delay}}ms ease-in-out',
+        style( {opacity: 0, transform: 'translateY(100%)'})
+      )
+    ],
+    { params: { duration: defaultDuration, delay: defaultDelay } }
+  )
+]);
+
 export const logoStarWars = trigger('logoStarWars', [
   transition(
     ':enter',
