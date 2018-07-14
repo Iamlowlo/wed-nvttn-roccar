@@ -7,6 +7,8 @@ import {CeremonyContainer} from './containers/landing/containers/ceremony/ceremo
 import {LunchContainer} from './containers/landing/containers/lunch/lunch.container';
 import {PartyContainer} from './containers/landing/containers/party/party.container';
 import {RSVPContactComponent} from './containers/landing/containers/rsvp-contact/rsvp-contact.component';
+import {IsAuthGuardService} from './services/is-auth-guard.service';
+import {IsInvitedGuardService} from './services/is-invited-guard.service';
 
 export const AppRoutes: Routes = [
     {
@@ -23,6 +25,7 @@ export const AppRoutes: Routes = [
     {
         path: 'landing',
         component: LandingComponent,
+        canActivate: [IsAuthGuardService],
         children: [
           {
             path: '',
@@ -35,7 +38,8 @@ export const AppRoutes: Routes = [
           },
           {
             path: 'comida',
-            component: LunchContainer
+            component: LunchContainer,
+            canActivate: [IsInvitedGuardService]
           },
           {
             path: 'fiesta',
@@ -44,6 +48,10 @@ export const AppRoutes: Routes = [
           {
             path: 'rsvp-contacto',
             component: RSVPContactComponent
+          },
+          {
+            path: '**',
+            redirectTo: 'ceremonia'
           }
         ]
     }
