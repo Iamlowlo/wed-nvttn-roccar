@@ -23,6 +23,7 @@ import { LunchContainer } from './containers/landing/containers/lunch/lunch.cont
 import { PartyContainer } from './containers/landing/containers/party/party.container';
 import { GmapComponent } from './components/gmap/gmap.component';
 import { RSVPContactComponent } from './containers/landing/containers/rsvp-contact/rsvp-contact.component';
+import { RsvpComponent } from './components/rsvp/rsvp.component';
 
 
 
@@ -48,7 +49,8 @@ const firebaseConfig = {
         LunchContainer,
         PartyContainer,
         GmapComponent,
-        RSVPContactComponent
+        RSVPContactComponent,
+        RsvpComponent
     ],
     imports: [
         BrowserModule,

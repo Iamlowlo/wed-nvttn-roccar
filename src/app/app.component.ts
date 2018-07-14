@@ -45,7 +45,6 @@ export class AppComponent implements OnDestroy {
               }
           }),
         this.af.object('data').valueChanges().subscribe(appData => {
-            console.log('appData', appData, !!appData)
             if (!!appData) {
                 window.localStorage.setItem('appData', JSON.stringify(appData));
             }
