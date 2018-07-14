@@ -3,4 +3,9 @@ export interface User {
   email: String;
   lunch: Boolean;
   party: Boolean;
+  rsvp?: {
+    ceremony: Boolean;
+    lunch: Boolean;
+    party: Boolean;
+  };
 }

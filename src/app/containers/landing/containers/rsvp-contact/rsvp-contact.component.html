@@ -9,7 +9,7 @@
         <h2>Répondez s'il vous plaît</h2>
         <form [formGroup]="rsvpForm">
             <ul class="rsvp-opt-group">
-                <li *ngIf="rsvpForm.controls.ceremony" class="input_list input_list__radio">
+                <li *ngIf="rsvpForm.controls.ceremony.enabled" class="input_list input_list__radio">
                     <h3 class="input_list__radio-title">Ceremonia</h3>
                     <label for="ceremony_yes"
                            class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__affirmative"
@@ -31,7 +31,7 @@
                                 formControlName="ceremony"
                                 [value]="false"></label>
                 </li>
-                <li *ngIf="rsvpForm.controls.lunch" class="input_list input_list__radio">
+                <li *ngIf="rsvpForm.controls.lunch.enabled" class="input_list input_list__radio">
                     <h3 class="input_list__radio-title">Comida</h3>
                     <label for="lunch_yes"
                            class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__affirmative"
@@ -54,7 +54,7 @@
                                [value]="false">
                     </label>
                 </li>
-                <li *ngIf="rsvpForm.controls.party" class="input_list input_list__radio">
+                <li *ngIf="rsvpForm.controls.party.enabled" class="input_list input_list__radio">
                     <h3 class="input_list__radio-title">Fiesta</h3>
                     <label for="party_yes"
                            class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__affirmative"

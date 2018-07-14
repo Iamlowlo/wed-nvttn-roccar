@@ -67,6 +67,8 @@ nav {
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    font-size: 0.8em;
+    line-height: 1.7em;
     &:before {
       content: '';
       display: block;
