@@ -7,78 +7,7 @@
     </div>
     <div class="info">
         <h2>Répondez s'il vous plaît</h2>
-        <form [formGroup]="rsvpForm">
-            <ul class="rsvp-opt-group">
-                <li *ngIf="rsvpForm.controls.ceremony.enabled" class="input_list input_list__radio">
-                    <h3 class="input_list__radio-title">Ceremonia</h3>
-                    <label for="ceremony_yes"
-                           class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__affirmative"
-                           [ngClass]="{'active': rsvpForm.get('ceremony').value === true}">
-                        <i class="icon-rebel"></i>
-                        <span>Si</span>
-                        <input type="radio"
-                               id="ceremony_yes"
-                               formControlName="ceremony"
-                               [value]="true">
-                    </label>
-                    <label for="ceremony_no"
-                           class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__negative"
-                           [ngClass]="{'active': rsvpForm.get('ceremony').value === false}">
-                        <i class="icon-empire"></i>
-                        <span>No</span>
-                        <input type="radio"
-                                id="ceremony_no"
-                                formControlName="ceremony"
-                                [value]="false"></label>
-                </li>
-                <li *ngIf="rsvpForm.controls.lunch.enabled" class="input_list input_list__radio">
-                    <h3 class="input_list__radio-title">Comida</h3>
-                    <label for="lunch_yes"
-                           class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__affirmative"
-                           [ngClass]="{'active': rsvpForm.get('lunch').value === true}">
-                        <i class="icon-rebel"></i>
-                        <span>Si</span>
-                        <input type="radio"
-                               id="lunch_yes"
-                               formControlName="lunch"
-                               [value]="true">
-                    </label>
-                    <label for="lunch_no"
-                           class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__negative"
-                           [ngClass]="{'active': rsvpForm.get('lunch').value === false}">
-                        <i class="icon-empire"></i>
-                        <span>No</span>
-                        <input type="radio"
-                               id="lunch_no"
-                               formControlName="lunch"
-                               [value]="false">
-                    </label>
-                </li>
-                <li *ngIf="rsvpForm.controls.party.enabled" class="input_list input_list__radio">
-                    <h3 class="input_list__radio-title">Fiesta</h3>
-                    <label for="party_yes"
-                           class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__affirmative"
-                           [ngClass]="{'active': rsvpForm.get('party').value === true}">
-                        <i class="icon-rebel"></i>
-                        <span>Si</span>
-                        <input type="radio"
-                               id="party_yes"
-                               formControlName="party"
-                               [value]="true">
-                    </label>
-                    <label for="party_no"
-                           class="input_list__radio-opt btn btn-secondary rsvp-opt rsvp-opt__negative"
-                           [ngClass]="{'active': rsvpForm.get('party').value === false}">
-                        <i class="icon-empire"></i>
-                        <span>No</span>
-                        <input type="radio"
-                               id="party_no"
-                               formControlName="party"
-                               [value]="false">
-                    </label>
-                </li>
-            </ul>
-        </form>
+        <app-rsvp [choiceAvailable]="'all'"></app-rsvp>
     </div>
     <div class="info">
         <h2>Contacta con nosotros</h2>

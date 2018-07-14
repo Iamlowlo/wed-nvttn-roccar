@@ -100,3 +100,43 @@ nav {
     }
   }
 }
+
+.rsvp-fly {
+  position: fixed;
+  background-color: $polite_white;
+  border: 2px solid $darkPurple;
+  bottom: 0;
+  right: 0;
+  width: 220px;
+  transition: transform 0.3s cubic-bezier(.07,1.12,.44,1.49);
+  transform: translateY(140px);
+  &.opened {
+    transform: translateY(0);
+    p i {
+      transform: rotateZ(180deg);
+    }
+  }
+  p {
+    display: flex;
+    cursor: pointer;
+    justify-content: space-between;
+    background-color: $purple;
+    color: $polite_white;
+    margin: 0;
+    padding: 0.8em;
+    i {
+      font-size: 2em;
+      line-height: 0.5;
+      transition: transform 0.3s ease-in;
+    }
+  }
+  app-rsvp {
+    padding: 1em;
+  }
+  /deep/ .rsvp-opt-group {
+    margin-bottom: 0;
+    .input_list {
+      padding-top: 0;
+    }
+  }
+}
