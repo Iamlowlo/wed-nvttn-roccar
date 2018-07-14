@@ -1,12 +1,14 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostBinding, OnInit, ViewChild} from '@angular/core';
+import {routerTransition} from '../../../../app.animations';
 
 @Component({
   selector: 'app-party',
   templateUrl: './party.container.html',
-  styleUrls: ['./party.container.scss']
+  styleUrls: ['./party.container.scss'],
+  animations: [routerTransition]
 })
 export class PartyContainer implements OnInit {
-
+  @HostBinding('@routerTransition') public isLoaded = {value: '*', params: {duration: 800}};
   @ViewChild('audio') audio: ElementRef;
   @ViewChild('galleryContainer') galleryContainer: ElementRef;
   private isPlayingAudio: Boolean = true;

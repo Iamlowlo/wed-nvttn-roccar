@@ -15,15 +15,15 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './containers/welcome/welcome.component';
 import { AdminComponent } from './containers/admin/admin.component';
 import { LoginComponent } from './containers/login/login.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginWatcherComponent } from './components/login-watcher/login-watcher.component';
 import { LandingComponent } from './containers/landing/landing.component';
 import { CeremonyContainer } from './containers/landing/containers/ceremony/ceremony.container';
 import { LunchContainer } from './containers/landing/containers/lunch/lunch.container';
 import { PartyContainer } from './containers/landing/containers/party/party.container';
 import { GmapComponent } from './components/gmap/gmap.component';
-import { RSVPContactComponent } from './containers/landing/containers/rsvp-contact/rsvp-contact.component';
 import { RsvpComponent } from './components/rsvp/rsvp.component';
+import { RSVPContactComponent } from './containers/landing/containers/rsvp-contact/rsvp-contact.component';
 
 
 
@@ -49,8 +49,8 @@ const firebaseConfig = {
         LunchContainer,
         PartyContainer,
         GmapComponent,
-        RSVPContactComponent,
-        RsvpComponent
+        RsvpComponent,
+        RSVPContactComponent
     ],
     imports: [
         BrowserModule,

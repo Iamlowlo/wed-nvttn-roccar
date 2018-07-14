@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChange, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs/Subscription';
@@ -10,36 +10,20 @@ import {AngularFireDatabase} from 'angularfire2/database';
   templateUrl: './rsvp.component.html',
   styleUrls: ['./rsvp.component.scss']
 })
-export class RsvpComponent implements OnInit {
-  private activeRoute: string;
+export class RsvpComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() choiceAvailable: string;
+  @Output() choiceChanged: EventEmitter<any> = new EventEmitter();
   private subscriptions: Array<Subscription>;
   public userData: User;
   private uid: string;
   private debounceFirebaseUpdate;
   public rsvpForm = new FormGroup({
-    ceremony: new FormControl( '', Validators.required),
-    lunch: new FormControl( {value: '', disabled: true}, Validators.required),
-    party: new FormControl( {value: '', disabled: true}, Validators.required)
+    ceremony: new FormControl( {value: null, disabled: true}, Validators.required),
+    lunch: new FormControl( {value: null, disabled: true}, Validators.required),
+    party: new FormControl( {value: null, disabled: true}, Validators.required)
   });
 
-  constructor(private router: Router, private db: AngularFireDatabase) {
-
-    this.router.events.subscribe(routerEvent => {
-      if (routerEvent instanceof NavigationEnd) {
-        this.activeRoute = routerEvent.urlAfterRedirects;
-        switch (this.activeRoute) {
-          case '/landing/comida':
-            console.log('Lunch');
-            break;
-          case '/landing/ceremonia':
-            console.log('Ceremony');
-            break;
-          case '/landing/fiesta':
-            console.log('Party');
-            break;
-        }
-      }
-    });
+  constructor(private db: AngularFireDatabase) {
 
     this.uid = window.localStorage.getItem('uid');
     this.subscriptions = [
@@ -52,8 +36,7 @@ export class RsvpComponent implements OnInit {
             lunch: userData.rsvp ? userData.rsvp.lunch : null,
             party: userData.rsvp ? userData.rsvp.party : null
           });
-          this.rsvpForm.controls['lunch'][!this.userData.lunch ? 'disable' : 'enable']();
-          this.rsvpForm.controls['party'][!this.userData.party ? 'disable' : 'enable']();
+          this.setChoiceAvailability();
         }),
       this.rsvpForm.valueChanges.subscribe(form => {
         clearTimeout(this.debounceFirebaseUpdate);
@@ -78,10 +61,10 @@ export class RsvpComponent implements OnInit {
           if (!!Object.keys(updateData).length) {
             this.db.database.ref().update(updateData)
               .then(resp => {
-                console.log('resp', resp);
+                this.choiceChanged.emit();
               })
               .catch(err => {
-                console.log('err', err);
+                console.error('err', err);
               });
           }
         }, 100);
@@ -91,6 +74,29 @@ export class RsvpComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.userData) {
+      this.setChoiceAvailability();
+    }
+  }
+
+  setChoiceAvailability() {
+    this.rsvpForm.controls['ceremony'][this.disableChoice('ceremony') ? 'enable' : 'disable']();
+    this.rsvpForm.controls['lunch'][this.disableChoice('lunch') ? 'enable' : 'disable']();
+    this.rsvpForm.controls['party'][this.disableChoice('party') ? 'enable' : 'disable']();
+  }
+
+  disableChoice(field: string) {
+    return (this.userData[field] || field === 'ceremony')
+        && (this.choiceAvailable === 'all' || this.choiceAvailable === field);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
   }
 }
 

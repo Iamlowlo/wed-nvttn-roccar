@@ -3,6 +3,7 @@ export interface User {
   email: String;
   lunch: Boolean;
   party: Boolean;
+  isKid?: Boolean;
   rsvp?: {
     ceremony: Boolean;
     lunch: Boolean;

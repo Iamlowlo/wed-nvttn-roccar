@@ -21,4 +21,9 @@
         <router-outlet></router-outlet>
     </main>
 </section>
-<app-rsvp></app-rsvp>
+<aside *ngIf="!!rsvpChoice"
+       class="rsvp-fly"
+       [ngClass]="{'opened': isOpen}">
+    <p (click)="toggleRsvp()">¿Contamos contigo? <i class="icon-angle-up"></i></p>
+    <app-rsvp [choiceAvailable]="rsvpChoice" (choiceChanged)="toggleRsvp(false)"></app-rsvp>
+</aside>

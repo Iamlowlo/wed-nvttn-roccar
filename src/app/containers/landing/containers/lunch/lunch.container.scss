@@ -1,5 +1,8 @@
 @import "~_variables.scss";
 
+:host {
+  display: block;
+}
 .menu {
   background-color: #F9F9F9;
   color: $purple;
