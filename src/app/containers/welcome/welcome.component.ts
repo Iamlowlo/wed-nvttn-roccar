@@ -54,7 +54,6 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
   playAudio(event) {
     if (event.toState === 'void') {
-      console.log('asdasd')
       this.audio.nativeElement.play();
     }
   }

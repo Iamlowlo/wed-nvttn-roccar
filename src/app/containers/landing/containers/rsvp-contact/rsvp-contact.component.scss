@@ -4,60 +4,7 @@
   display: block;
 }
 
-.input_list__radio-opt {
-  border-color: $onyx;
-  color: $onyx;
-  align-items: center;
-  span {
-    font-size: 0.8em;
-  }
-  i {
-    font-size: 2em;
-  }
-}
 
-.rsvp-opt{
-
-  @media (min-width: 480px) {
-    &-group {
-      display: flex;
-      margin-bottom: 2em;
-      .input_list {
-        width: 33.33%;
-        &__radio-opt {
-          margin-top: 0.4em;
-          margin-right: 0.4em;
-        }
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
-  opacity: 0.5;
-  &:hover,
-  &.active {
-    opacity: 1;
-  }
-  &:hover {
-    background-color: white;
-  }
-  &__affirmative {
-    &.active {
-      background-color: $curiousBlue;
-      border-color: white;
-      color: white;
-    }
-  }
-  &__negative {
-    &.active {
-      background-color: $onyx;
-      border-color: $crimson;
-      color: $crimson;
-    }
-
-  }
-}
 
 .contact-info {
   li {
