@@ -12,8 +12,7 @@
             <li *ngIf="userData && userData.party"
                 [routerLink]="['fiesta']"
                 [routerLinkActive]="['active']">Fiesta</li>
-            <li *ngIf="userData && userData.party"
-                [routerLink]="['rsvp-contacto']"
+            <li [routerLink]="['rsvp-contacto']"
                 [routerLinkActive]="['active']">RSVP</li>
         </ul>
     </nav>

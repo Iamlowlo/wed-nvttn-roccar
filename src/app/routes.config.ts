@@ -9,6 +9,7 @@ import {PartyContainer} from './containers/landing/containers/party/party.contai
 import {RSVPContactComponent} from './containers/landing/containers/rsvp-contact/rsvp-contact.component';
 import {IsAuthGuardService} from './services/is-auth-guard.service';
 import {IsInvitedGuardService} from './services/is-invited-guard.service';
+import {IsAdminGuardService} from './services/is-admin-guard.service';
 
 export const AppRoutes: Routes = [
     {
@@ -16,7 +17,8 @@ export const AppRoutes: Routes = [
         component: LoginComponent
     }, {
         path: 'admin',
-        component: AdminComponent
+        component: AdminComponent,
+        canActivate: [IsAdminGuardService]
     },
     {
         path: 'welcome',

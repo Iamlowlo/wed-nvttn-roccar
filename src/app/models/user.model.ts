@@ -4,6 +4,7 @@ export interface User {
   lunch: Boolean;
   party: Boolean;
   isKid?: Boolean;
+  admin: Boolean;
   rsvp?: {
     ceremony: Boolean;
     lunch: Boolean;

@@ -1,0 +1,113 @@
+@import "~_variables.scss";
+
+$mobile_side_padding: 1em;
+$desktop_side_padding: 3em;
+
+:host {
+  display: block;
+}
+
+nav {
+  margin: 1em (-1 * $mobile_side_padding) 1.5em (-1 * $mobile_side_padding);
+  border-bottom: 1px solid $darkPurple;
+  border-top: 1px solid $darkPurple;
+  background-color: $purple;
+  color: $alabaster;
+  padding-left: $mobile_side_padding;
+  padding-right: $mobile_side_padding;
+  @media (min-width: 480px) {
+    margin-left: -1 * $desktop_side_padding;
+    margin-right: -1 * $desktop_side_padding;
+    padding-left: $desktop_side_padding;
+    padding-right: $desktop_side_padding;
+  }
+  ul {
+    display: flex;
+  }
+  li {
+    padding: 0.6em 0.8em;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    &:before {
+      content: '';
+      display: block;
+      height: 4px;
+      width: 4px;
+      background-color: $alabaster;
+      border-radius: 50%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 3px;
+      margin: auto;
+      transform: scale(0) translateY(100%);
+      transition: transform 0.2s cubic-bezier(.07,1.12,.44,1.49);
+    }
+    &.active {
+      font-weight: bold;
+      font-size: 1.2em;
+      line-height: 0.6em;
+      &:before {
+        transform: scale(1) translateY(0%);
+      }
+    }
+    &:first-child {
+      margin-left: -0.8em;
+    }
+    &:last-child {
+      margin-right: -0.8em;
+    }
+  }
+}
+
+.admin {
+  th, td {
+    text-align: center;
+  }
+  .alignleft {
+    text-align: left;
+  }
+  &--title {
+    margin-bottom: 0.5em;
+  }
+  &--users{
+    margin-bottom: 2em;
+    &--summary {
+      display: flex;
+      max-width: 75%;
+      justify-content: space-between;
+    }
+    &--list {
+      th {
+        padding-bottom: 1em;
+      }
+      td {
+        padding-bottom: 0.4em;
+      }
+      &__small {
+        width: 100px;
+      }
+    }
+  }
+  &--user{
+    .icon-cross {
+      opacity: 0.1;
+    }
+    i {
+      opacity: 0.3;
+      &.will-come,
+      &.will-not-come {
+        opacity: 1;
+      }
+      &.will-come {
+        color: $greenPigment;
+      }
+      &.will-not-come {
+        color: $crimson;
+      }
+    }
+  }
+}

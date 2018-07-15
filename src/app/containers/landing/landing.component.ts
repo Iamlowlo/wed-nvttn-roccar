@@ -14,7 +14,7 @@ export class LandingComponent implements OnInit, OnDestroy {
   public userData: User;
   public isAuth: Boolean;
   public isOpen: Boolean;
-  private rsvpChoice: string;
+  public rsvpChoice: string;
   private subscriptions: Array<Subscription>;
 
   constructor(

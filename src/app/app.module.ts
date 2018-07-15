@@ -26,6 +26,7 @@ import { RsvpComponent } from './components/rsvp/rsvp.component';
 import { RSVPContactComponent } from './containers/landing/containers/rsvp-contact/rsvp-contact.component';
 import { IsAuthGuardService } from './services/is-auth-guard.service';
 import {IsInvitedGuardService} from './services/is-invited-guard.service';
+import {IsAdminGuardService} from './services/is-admin-guard.service';
 
 
 
@@ -65,6 +66,7 @@ const firebaseConfig = {
     ],
     providers: [
         IsAuthGuardService,
+        IsAdminGuardService,
         IsInvitedGuardService
     ],
     bootstrap: [AppComponent]

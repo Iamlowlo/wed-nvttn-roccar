@@ -1,3 +1,71 @@
-<p>
-  admin works!
-</p>
+<section class="main-wrapper">
+    <header>
+        <h1>Página de admin</h1></header>
+    <nav>
+        <ul>
+            <li [routerLink]="['ceremonia']"
+                [routerLinkActive]="['active']">Ceremonia</li>
+            <li [routerLink]="['comida']"
+                [routerLinkActive]="['active']">Comida</li>
+            <li [routerLink]="['fiesta']"
+                [routerLinkActive]="['active']">Fiesta</li>
+            <li [routerLink]="['rsvp-contacto']"
+                [routerLinkActive]="['active']">RSVP</li>
+        </ul>
+    </nav>
+    <main class="admin">
+        <section class="admin--users">
+            <h1 class="admin--title">Han marcado que vendrán</h1>
+            <ul class="admin--users--summary">
+                <li>Ceremonia: {{attendanceData.ceremony}}</li>
+                <li>Comida: {{attendanceData.lunch}}</li>
+                <li>Fiesta: {{attendanceData.party}}</li>
+            </ul>
+        </section>
+        <section class="admin--users">
+            <h1 class="admin--title">Han marcado que no vendrán</h1>
+            <ul class="admin--users--summary">
+                <li>Ceremonia: {{nonAttendanceData.ceremony}}</li>
+                <li>Comida: {{nonAttendanceData.lunch}}</li>
+                <li>Fiesta: {{nonAttendanceData.party}}</li>
+            </ul>
+        </section>
+        <section class="admin--users">
+            <h1 class="admin--title">Quedan por responder</h1>
+            <ul class="admin--users--summary">
+                <li>Ceremonia: {{nonRespondedData.ceremony}}</li>
+                <li>Comida: {{nonRespondedData.lunch}}</li>
+                <li>Fiesta: {{nonRespondedData.party}}</li>
+            </ul>
+        </section>
+        <section class="admin--users">
+            <h1 class="admin--title">Lista de usuarios</h1>
+            <table class="admin--users--list">
+                <thead>
+                    <tr>
+                        <th class="alignleft">Nombre</th>
+                        <th class="alignleft">Email</th>
+                        <th class="admin--users--list__small">¿Vendrá a la ceremonia?</th>
+                        <th class="admin--users--list__small">¿Invitad@ a comer?</th>
+                        <th class="admin--users--list__small">¿Invitad@ a la fiesta?</th>
+                    </tr>
+                </thead>
+                <tr *ngFor="let user of userDataList" class="admin--user">
+                    <td class="alignleft">{{user.name}}</td>
+                    <td class="alignleft">{{user.email}}</td>
+                    <td><i class="icon-checkmark"
+                           [ngClass]="{'will-come': user.rsvp && user.rsvp.ceremony,
+                                       'will-not-come': user.rsvp && user.rsvp.ceremony !== undefined && !user.rsvp.ceremony}"></i></td>
+                    <td><i [ngClass]="{'icon-checkmark': user.lunch,
+                                       'icon-cross': !user.lunch,
+                                       'will-come': user.rsvp && user.lunch && user.rsvp.lunch,
+                                       'will-not-come': user.rsvp && user.rsvp.lunch !== undefined && user.lunch && !user.rsvp.lunch}"></i></td>
+                    <td><i [ngClass]="{'icon-checkmark': user.party,
+                                       'icon-cross': !user.party,
+                                       'will-come': user.rsvp && user.party && user.rsvp.party,
+                                       'will-not-come': user.rsvp && user.rsvp.party !== undefined && user.party && !user.rsvp.party}"></i></td>
+                </tr>
+            </table>
+        </section>
+    </main>
+</section>
