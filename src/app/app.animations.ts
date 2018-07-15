@@ -141,7 +141,7 @@ export const textCrawl = trigger('textCrawl', [
     [
       style( {
         opacity: 1,
-        transform: 'perspective(200px) rotateX(25deg) translateZ(0px) translateY(140%)'}),
+        transform: 'perspective(200px) rotateX(25deg) translateZ(0px) translateY(105%)'}),
       group([
         animate(
           '{{duration_leave}}ms {{delay_leave}}ms linear',

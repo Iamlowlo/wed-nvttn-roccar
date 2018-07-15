@@ -12,9 +12,6 @@ export class IsInvitedGuardService implements  CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
         return this.db.object('/guests/' + window.localStorage.getItem('uid'))
           .valueChanges().map( (data: User) => {
-            console.log('route', route);
-            console.log('state', state);
-            console.log('data', data);
             let isInvited = false;
             switch (state.url) {
               case '/landing/ceremonia':

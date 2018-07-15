@@ -60,7 +60,11 @@ export class GmapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchBox = new google.maps.places.SearchBox(this.searchInput.nativeElement);
+    this.searchBox = new google.maps.places.SearchBox(this.searchInput.nativeElement, {
+      bounds : new google.maps.LatLngBounds(
+        new google.maps.LatLng(35.350525, -10.638289),
+        new google.maps.LatLng(43.114616, 3.797746))
+    });
     this.map = new google.maps.Map(this.gmap.nativeElement, {
       center: new google.maps.LatLng(this._latLng.lat(), this._latLng.lng()),
       zoom: 15,
@@ -89,7 +93,7 @@ export class GmapComponent implements OnInit {
         address: addressValue
       });
     } else {
-      this.isSearchboxOpened = false;
+      this.isSearchboxOpened = !this.isSearchboxOpened ;
       this.searchForm.controls.address.setValue('');
       this.searchForm.controls.address.markAsUntouched();
     }
