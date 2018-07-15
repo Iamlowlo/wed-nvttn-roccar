@@ -19,8 +19,8 @@ export class LunchContainer implements OnInit, OnDestroy {
     lng: -3.6902783
   };
   public ceremonyAddress = {
-    lat: 40.393525,
-    lng: -3.7000989
+    lat: 40.393830,
+    lng: -3.698495
   };
   public ceremonySuggestion = {
     label: 'la ceremonia',
