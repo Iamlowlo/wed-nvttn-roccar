@@ -27,6 +27,8 @@ import { RSVPContactComponent } from './containers/landing/containers/rsvp-conta
 import { IsAuthGuardService } from './services/is-auth-guard.service';
 import {IsInvitedGuardService} from './services/is-invited-guard.service';
 import {IsAdminGuardService} from './services/is-admin-guard.service';
+import {HttpClientModule} from '@angular/common/http';
+import {SpotifyService} from './services/spotify.service';
 
 
 
@@ -57,6 +59,7 @@ const firebaseConfig = {
     ],
     imports: [
         BrowserModule,
+        HttpClientModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(AppRoutes),
         AngularFireModule.initializeApp(firebaseConfig),
@@ -67,7 +70,8 @@ const firebaseConfig = {
     providers: [
         IsAuthGuardService,
         IsAdminGuardService,
-        IsInvitedGuardService
+        IsInvitedGuardService,
+        SpotifyService
     ],
     bootstrap: [AppComponent]
 })

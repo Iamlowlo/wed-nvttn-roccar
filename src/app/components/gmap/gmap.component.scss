@@ -44,6 +44,9 @@
 .sole_input_container {
   margin-bottom: 0.5em;
   margin-top: 0.3em;
+  label {
+    top: 1.8em;
+  }
 }
 .toggler_container {
   cursor: pointer;

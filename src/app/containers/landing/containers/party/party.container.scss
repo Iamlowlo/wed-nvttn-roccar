@@ -132,6 +132,26 @@
   }
 }
 
+.searchbox {
+  display: flex;
+  input {
+    width: 25em;
+  }
+  label {
+    color: $darkPurple;
+  }
+  button {
+    font-size: 0.8em;
+    color: $polite_white;
+    background-color: $purple;
+    border-color: $darkPurple;
+    height: 3em;
+    align-self: flex-end;
+    width: 3em;
+    padding: 0.7em 0.6em 0.4em;
+  }
+}
+
 @keyframes showHide {
   0% {
     opacity: 1;

@@ -1,5 +1,7 @@
 import {Component, ElementRef, HostBinding, OnInit, ViewChild} from '@angular/core';
 import {routerTransition} from '../../../../app.animations';
+import {FormControl, FormGroup} from '@angular/forms';
+import {SpotifyService} from '../../../../services/spotify.service';
 
 @Component({
   selector: 'app-party',
@@ -12,8 +14,18 @@ export class PartyContainer implements OnInit {
   @ViewChild('audio') audio: ElementRef;
   @ViewChild('galleryContainer') galleryContainer: ElementRef;
   private isPlayingAudio: Boolean = true;
+  public partyAddress = {
+    lat: 40.431543,
+    lng: -3.702142
+  };
+  public searchForm = new FormGroup({
+    song: new FormControl('')
+  });
+  public searchSongSuggestions: Array<any>;
 
-  constructor() { }
+  constructor(public spotifyService: SpotifyService) {
+    this.searchSongSuggestions = [];
+  }
 
   ngOnInit() {
   }
@@ -50,6 +62,22 @@ export class PartyContainer implements OnInit {
         : _galleryImages.length - 1;
     }
     _galleryContainer.scroll(_galleryImages[goToIdx].offsetLeft, 0);
+  }
+
+  onFocus($event) {
+    $event.target.classList.add('ng-focused');
+  }
+
+  onBlur($event) {
+    $event.target.classList.remove('ng-focused');
+  }
+
+  searchSong() {
+    this.spotifyService
+      .searchSong(this.searchForm.controls.song.value)
+      .subscribe(results => {
+        console.log('results', results);
+      });
   }
 }
 
