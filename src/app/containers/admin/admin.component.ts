@@ -16,6 +16,9 @@ export class AdminComponent implements OnInit {
   public nonRespondedData;
   private subscriptions: Array<Subscription>;
   constructor(private db: AngularFireDatabase) {
+    this.attendanceData = {ceremony: 0, lunch: 0, party: 0};
+    this.nonAttendanceData = {ceremony: 0, lunch: 0, party: 0};
+    this.nonRespondedData = {ceremony: 0, lunch: 0, party: 0};
     this.subscriptions = [
       this.db
         .list('guests')

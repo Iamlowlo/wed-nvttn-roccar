@@ -5,6 +5,8 @@
       ".write": "auth != null"
     },
     "guests": {
+      ".read": "auth.uid === 'TtIDLkBKpBTRgzySMqUxRCaoBuO2'",
+      ".write": "auth.uid === 'TtIDLkBKpBTRgzySMqUxRCaoBuO2'",
       "$uid": {
         ".read": "$uid === auth.uid || auth.uid === 'TtIDLkBKpBTRgzySMqUxRCaoBuO2'",
         ".write": "$uid === auth.uid || auth.uid === 'TtIDLkBKpBTRgzySMqUxRCaoBuO2'"

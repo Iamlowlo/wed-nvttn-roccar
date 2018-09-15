@@ -14,7 +14,7 @@
         </ul>
     </nav>
     <main class="admin">
-        <section class="admin--users">
+        <section class="admin--users" *ngIf="attendanceData">
             <h1 class="admin--title">Han marcado que vendrán</h1>
             <ul class="admin--users--summary">
                 <li>Ceremonia: {{attendanceData.ceremony}}</li>
@@ -22,7 +22,7 @@
                 <li>Fiesta: {{attendanceData.party}}</li>
             </ul>
         </section>
-        <section class="admin--users">
+        <section class="admin--users" *ngIf="nonAttendanceData">
             <h1 class="admin--title">Han marcado que no vendrán</h1>
             <ul class="admin--users--summary">
                 <li>Ceremonia: {{nonAttendanceData.ceremony}}</li>
@@ -30,7 +30,7 @@
                 <li>Fiesta: {{nonAttendanceData.party}}</li>
             </ul>
         </section>
-        <section class="admin--users">
+        <section class="admin--users" *ngIf="nonRespondedData">
             <h1 class="admin--title">Quedan por responder</h1>
             <ul class="admin--users--summary">
                 <li>Ceremonia: {{nonRespondedData.ceremony}}</li>
