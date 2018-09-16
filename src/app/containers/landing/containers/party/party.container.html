@@ -106,11 +106,37 @@
                 </div>
                 <button class="btn"><i class="icon-search"></i></button>
             </form>
-            <ul class="search-song-suggestion" *ngIf="searchSongSuggestions.length">
-                <li class="search-song-suggestion__element"
-                    *ngFor="let searchSongSuggestion of searchSongSuggestions"
-                    (click)="pickTrack(searchSongSuggestion)">
-                    <img [src]="searchSongSuggestion.image" alt="searchSongSuggestion.trackName">
+            <div  *ngIf="!!searchSuggestionsOpened"
+                  class="search-song-suggestions__container" >
+                <img *ngIf="!searchSongSuggestions.length"
+                     class="search-song-suggestion"
+                     src="assets/starwars_loader.gif"
+                     alt="loader"/>
+                <ul class="search-song-suggestions" *ngIf="searchSongSuggestions.length">
+                    <li class="search-song-suggestions__element"
+                        *ngFor="let searchSongSuggestion of searchSongSuggestions"
+                        (click)="pickTrack(searchSongSuggestion)">
+                        <div><img [src]="searchSongSuggestion.image" [alt]="searchSongSuggestion.trackName"></div>
+                        <ul class="search-song-suggestions__element__info">
+                            <li>{{searchSongSuggestion.artist}} - {{searchSongSuggestion.trackName}}</li>
+                            <li>{{searchSongSuggestion.duration}}</li>
+                            <li><i class="icon-plus"></i></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div *ngIf="!!tracksPicked.length" class="picked-tracks__container">
+            <h3>Estas son tus canciones:</h3>
+            <ul class="picked-tracks">
+                <li *ngFor="let trackPicked of tracksPicked"
+                    class="picked-tracks__element">
+                    <div><img [src]="trackPicked.image" [alt]="trackPicked.trackName"></div>
+                    <ul class="picked-tracks__element__info">
+                        <li class="picked-tracks__element__track-name">{{trackPicked.artist}} - {{trackPicked.trackName}}</li>
+                        <li class="picked-tracks__element__action">Escuchar <i class="icon-angle-right"></i></li>
+                        <li class="picked-tracks__element__action picked-tracks__element__action--delete" (click)="removeTrack(trackPicked)">Borar <i class="icon-cross"></i></li>
+                    </ul>
                 </li>
             </ul>
         </div>

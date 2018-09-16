@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {SpotifyArtist, SpotifySearchTrackResponse, SpotifyTrack} from '../models/spotify.model';
+import moment = require('moment');
 
 
 @Injectable()
@@ -10,12 +11,11 @@ export class SpotifyService {
   private spotifyAcountsPath = 'https://us-central1-wed-nvttn-roccar.cloudfunctions.net/getSpotifyToken';
 
   private searchTrackFormatter = (track: SpotifyTrack) => {
-    console.log({track});
     return {
       id: track.id,
       artist: track.artists
                 .reduce((acc, artist) => {
-                  return acc + (!!acc) ? ' & ' : '' + artist.name;
+                  return acc + ((!!acc) ? ' & ' : '') + artist.name;
                 }, ''),
       trackName: track.name,
       image: track.album.images
@@ -25,7 +25,7 @@ export class SpotifyService {
                     : image;
                 }, {height: 9999, url: '', width: 9999})
                 .url,
-      duration: track.duration,
+      duration: moment(track.duration_ms).format('m:ss'),
       link: track.external_urls.spotify
     };
   }
@@ -49,9 +49,12 @@ export class SpotifyService {
   }
 
   getToken(functionCallback?: Function) {
-    // return this.http.get(this.spotifyAcountsPath).map(() => functionCallback);
-    return this.http.get(this.spotifyAcountsPath).subscribe(resp => {
+    return this.http.get(this.spotifyAcountsPath).map(resp => {
       console.log({resp});
+      return functionCallback;
     });
+    // return this.http.get(this.spotifyAcountsPath).subscribe(resp => {
+    //   console.log({resp});
+    // });
   }
 }

@@ -134,6 +134,9 @@
 
 .searchbox {
   display: flex;
+  &-container {
+    width: 29.9em;
+  }
   input {
     width: 25em;
   }
@@ -152,9 +155,92 @@
   }
 }
 
-.search-song-suggestion {
+.search-song-suggestions {
+  width: 100%;
+  max-height: 15em;
+  overflow: auto;
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 5em;
+    width: 100%;
+    background-color: lighten($polite_white, 5);
+    border: 1px solid $purple;
+    border-top: none;
+  }
   &__element {
+    display: flex;
+    cursor: pointer;
+    &:not(:last-child) {
+      border-bottom: 1px solid $purple;
+    }
+    img {
+      height: 64px;
+      width: 64px;
+    }
+    &__info {
+      padding: 0.5em 0;
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      align-items: center;
+      li {
+        padding: 0 0.5em;
+        &:first-child {
+          margin-right: auto;
+        }
+      }
+    }
+    &:hover {
+      background-color: $alabaster;
+      i.icon-angle-right {
+        transform: translateX(5px);
+      }
+    }
+  }
+}
 
+.picked-tracks {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__container {
+    padding: 2em 0;
+    h3 {
+      padding-bottom: 0.5em;
+    }
+  }
+  &__element {
+    display: flex;
+    width: 100%;
+    img {
+      flex-grow: 0;
+    }
+    &__info {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      li {
+        padding: 0.5em;
+      }
+    }
+    &__track-name {
+      width: 100%;
+    }
+    &__action {
+      width: 50%;
+      cursor: pointer;
+      &--delete {
+        text-align: right;
+      }
+    }
+    @media (min-width: 480px) {
+      width: 50%;
+    }
+    @media (min-width: 1024px) {
+      width: 33%;
+    }
   }
 }
 

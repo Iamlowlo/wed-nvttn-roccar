@@ -7,6 +7,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {SpotifyFormattedTrack, SpotifyToken} from '../../../../models/spotify.model';
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import {User} from '../../../../models/user.model';
 
 @Component({
   selector: 'app-party',
@@ -29,10 +30,14 @@ export class PartyContainer implements OnInit, OnDestroy {
     song: new FormControl('')
   });
   public searchSongSuggestions: Array<any>;
+  public searchSuggestionsOpened: Boolean;
   public tracksPicked: Array<any>;
+  private userTracksRoute: string;
 
   constructor(public db: AngularFireDatabase, public spotifyService: SpotifyService) {
     this.searchSongSuggestions = [];
+    this.userTracksRoute = 'guests/' + window.localStorage.getItem('uid') + '/tracks';
+    this.searchSuggestionsOpened = false;
     this.tracksPicked = [];
     this.spotifyTokenData = {} as SpotifyToken;
     this.subscriptions = [];
@@ -44,23 +49,26 @@ export class PartyContainer implements OnInit, OnDestroy {
       this.db.object('data/spotify')
         .valueChanges()
         .subscribe((spotifyData: SpotifyToken) => {
-          console.log(moment().unix(), '-', spotifyData.token_expirationDate);
-          console.log(spotifyData);
-          if (moment().isAfter(spotifyData.token_expirationDate, 'second')) {
-            console.log('isAfter');
+          if (moment().isAfter(spotifyData.token_expirationDate * 1000, 'second')) {
             this.spotifyService
               .getToken()
-              // .subscribe(functionCallback => {
-              //   if (functionCallback) {
-              //     functionCallback();
-              //   }
-              // });
-            ;
-            console.log('isBefore');
+              .subscribe(functionCallback => {
+                if (functionCallback) {
+                  functionCallback();
+                }
+              });
           } else {
             this.spotifyTokenData = spotifyData;
           }
-        }));
+        }),
+        this.db.object(this.userTracksRoute)
+          .valueChanges()
+          .subscribe((userTracks: Array<SpotifyFormattedTrack>) => {
+            if (!!userTracks && userTracks.length) {
+              this.tracksPicked = userTracks;
+            }
+          })
+    );
   }
 
   pauseMusic() {
@@ -106,17 +114,40 @@ export class PartyContainer implements OnInit, OnDestroy {
   }
 
   pickTrack(track) {
-    this.tracksPicked.push(track);
+    this.searchSuggestionsOpened = false;
+    if (!this.tracksPicked.filter(_track => _track.id === track.id).length) {
+      this.tracksPicked.push(track);
+      this.db.database.ref()
+          .update({
+            [this.userTracksRoute]: this.tracksPicked
+          })
+          .then(res => {
+            console.log('database updated');
+          })
+          .catch(err => {
+            console.error({err});
+          });
+    }
   }
 
   removeTrack(track) {
-    this.tracksPicked.filter(_track => track.id !== _track.id);
+    this.db.database.ref()
+        .update({
+          [this.userTracksRoute]: this.tracksPicked.filter(_track => track.id !== _track.id)
+        })
+        .then(res => {
+          console.log('database updated');
+        })
+        .catch(err => {
+          console.error({err});
+        });
   }
 
   searchSong(searchValue: string) {
-    if (moment().isBefore(this.spotifyTokenData.token_expirationDate, 'second')) {
-      // this.spotifyService.getToken(_.bind(this.searchSong, this.searchForm.controls.song.value));
+    if (moment().isAfter(this.spotifyTokenData.token_expirationDate * 1000, 'second')) {
+      this.spotifyService.getToken(_.bind(this.searchSong, this.searchForm.controls.song.value));
     } else {
+      this.searchSuggestionsOpened = true;
       this.spotifyService
         .searchSong(this.spotifyTokenData.token, searchValue || this.searchForm.controls.song.value)
         .subscribe((results: Array<SpotifyFormattedTrack>) => {
@@ -127,7 +158,6 @@ export class PartyContainer implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('Destroy')
     this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
     });

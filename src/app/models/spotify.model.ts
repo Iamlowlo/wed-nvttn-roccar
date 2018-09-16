@@ -19,12 +19,12 @@ export interface SpotifyTrack {
   external_urls: {
       spotify: string;
     };
-  duration: number;
+  duration_ms: number;
 }
 
 export interface SpotifyFormattedTrack {
   artist: string;
-  duration: number;
+  duration: string;
   id: string;
   image: string;
   link: string;
