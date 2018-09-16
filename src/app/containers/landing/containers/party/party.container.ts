@@ -1,7 +1,12 @@
-import {Component, ElementRef, HostBinding, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostBinding, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {routerTransition} from '../../../../app.animations';
 import {FormControl, FormGroup} from '@angular/forms';
 import {SpotifyService} from '../../../../services/spotify.service';
+import {AngularFireDatabase} from 'angularfire2/database';
+import {Subscription} from 'rxjs/Subscription';
+import {SpotifyFormattedTrack, SpotifyToken} from '../../../../models/spotify.model';
+import * as moment from 'moment';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-party',
@@ -9,11 +14,13 @@ import {SpotifyService} from '../../../../services/spotify.service';
   styleUrls: ['./party.container.scss'],
   animations: [routerTransition]
 })
-export class PartyContainer implements OnInit {
+export class PartyContainer implements OnInit, OnDestroy {
   @HostBinding('@routerTransition') public isLoaded = {value: '*', params: {duration: 800}};
   @ViewChild('audio') audio: ElementRef;
   @ViewChild('galleryContainer') galleryContainer: ElementRef;
   private isPlayingAudio: Boolean = true;
+  private subscriptions: Array<Subscription>;
+  private spotifyTokenData: SpotifyToken;
   public partyAddress = {
     lat: 40.431543,
     lng: -3.702142
@@ -22,12 +29,38 @@ export class PartyContainer implements OnInit {
     song: new FormControl('')
   });
   public searchSongSuggestions: Array<any>;
+  public tracksPicked: Array<any>;
 
-  constructor(public spotifyService: SpotifyService) {
+  constructor(public db: AngularFireDatabase, public spotifyService: SpotifyService) {
     this.searchSongSuggestions = [];
+    this.tracksPicked = [];
+    this.spotifyTokenData = {} as SpotifyToken;
+    this.subscriptions = [];
   }
 
   ngOnInit() {
+    console.log('Init');
+    this.subscriptions.push(
+      this.db.object('data/spotify')
+        .valueChanges()
+        .subscribe((spotifyData: SpotifyToken) => {
+          console.log(moment().unix(), '-', spotifyData.token_expirationDate);
+          console.log(spotifyData);
+          if (moment().isAfter(spotifyData.token_expirationDate, 'second')) {
+            console.log('isAfter');
+            this.spotifyService
+              .getToken()
+              // .subscribe(functionCallback => {
+              //   if (functionCallback) {
+              //     functionCallback();
+              //   }
+              // });
+            ;
+            console.log('isBefore');
+          } else {
+            this.spotifyTokenData = spotifyData;
+          }
+        }));
   }
 
   pauseMusic() {
@@ -72,12 +105,32 @@ export class PartyContainer implements OnInit {
     $event.target.classList.remove('ng-focused');
   }
 
-  searchSong() {
-    this.spotifyService
-      .searchSong(this.searchForm.controls.song.value)
-      .subscribe(results => {
-        console.log('results', results);
-      });
+  pickTrack(track) {
+    this.tracksPicked.push(track);
+  }
+
+  removeTrack(track) {
+    this.tracksPicked.filter(_track => track.id !== _track.id);
+  }
+
+  searchSong(searchValue: string) {
+    if (moment().isBefore(this.spotifyTokenData.token_expirationDate, 'second')) {
+      // this.spotifyService.getToken(_.bind(this.searchSong, this.searchForm.controls.song.value));
+    } else {
+      this.spotifyService
+        .searchSong(this.spotifyTokenData.token, searchValue || this.searchForm.controls.song.value)
+        .subscribe((results: Array<SpotifyFormattedTrack>) => {
+          console.log('results', results);
+          this.searchSongSuggestions = results;
+        });
+    }
+  }
+
+  ngOnDestroy() {
+    console.log('Destroy')
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
   }
 }
 

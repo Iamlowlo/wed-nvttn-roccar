@@ -108,8 +108,9 @@
             </form>
             <ul class="search-song-suggestion" *ngIf="searchSongSuggestions.length">
                 <li class="search-song-suggestion__element"
-                    *ngFor="let searchSongSuggestion of searchSongSuggestions">
-                    {{searchSongSuggestion | json}}
+                    *ngFor="let searchSongSuggestion of searchSongSuggestions"
+                    (click)="pickTrack(searchSongSuggestion)">
+                    <img [src]="searchSongSuggestion.image" alt="searchSongSuggestion.trackName">
                 </li>
             </ul>
         </div>
