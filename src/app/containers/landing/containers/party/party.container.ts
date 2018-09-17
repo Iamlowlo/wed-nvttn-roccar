@@ -29,7 +29,7 @@ export class PartyContainer implements OnInit, OnDestroy {
   public searchForm = new FormGroup({
     song: new FormControl('')
   });
-  public searchSongSuggestions: Array<any>;
+  public searchSongSuggestions: Array<SpotifyFormattedTrack>;
   public searchSuggestionsOpened: Boolean;
   public tracksPicked: Array<any>;
   private userTracksRoute: string;
@@ -49,7 +49,7 @@ export class PartyContainer implements OnInit, OnDestroy {
       this.db.object('data/spotify')
         .valueChanges()
         .subscribe((spotifyData: SpotifyToken) => {
-          if (moment().isAfter(spotifyData.token_expirationDate * 1000, 'second')) {
+          if (moment().isAfter(spotifyData.token_expirationDate, 'second')) {
             this.spotifyService
               .getToken()
               .subscribe(functionCallback => {
@@ -64,9 +64,9 @@ export class PartyContainer implements OnInit, OnDestroy {
         this.db.object(this.userTracksRoute)
           .valueChanges()
           .subscribe((userTracks: Array<SpotifyFormattedTrack>) => {
-            if (!!userTracks && userTracks.length) {
-              this.tracksPicked = userTracks;
-            }
+            this.tracksPicked = !!userTracks && userTracks.length
+              ? userTracks
+              : [];
           })
     );
   }
@@ -122,10 +122,10 @@ export class PartyContainer implements OnInit, OnDestroy {
             [this.userTracksRoute]: this.tracksPicked
           })
           .then(res => {
-            console.log('database updated');
+            // console.log('database updated');
           })
           .catch(err => {
-            console.error({err});
+            // console.error({err});
           });
     }
   }
@@ -136,22 +136,25 @@ export class PartyContainer implements OnInit, OnDestroy {
           [this.userTracksRoute]: this.tracksPicked.filter(_track => track.id !== _track.id)
         })
         .then(res => {
-          console.log('database updated');
+          // console.log('database updated');
         })
         .catch(err => {
-          console.error({err});
+          // console.error({err});
         });
   }
 
   searchSong(searchValue: string) {
-    if (moment().isAfter(this.spotifyTokenData.token_expirationDate * 1000, 'second')) {
+    if (!searchValue && !this.searchForm.controls.song.value) {
+      return false;
+    }
+    if (moment().isAfter(this.spotifyTokenData.token_expirationDate, 'second')) {
       this.spotifyService.getToken(_.bind(this.searchSong, this.searchForm.controls.song.value));
     } else {
       this.searchSuggestionsOpened = true;
+      this.searchSongSuggestions = [];
       this.spotifyService
         .searchSong(this.spotifyTokenData.token, searchValue || this.searchForm.controls.song.value)
         .subscribe((results: Array<SpotifyFormattedTrack>) => {
-          console.log('results', results);
           this.searchSongSuggestions = results;
         });
     }

@@ -29,6 +29,7 @@ import {IsInvitedGuardService} from './services/is-invited-guard.service';
 import {IsAdminGuardService} from './services/is-admin-guard.service';
 import {HttpClientModule} from '@angular/common/http';
 import {SpotifyService} from './services/spotify.service';
+import { PlaylistContainer } from './containers/playlist/playlist.container';
 
 
 
@@ -55,7 +56,8 @@ const firebaseConfig = {
         PartyContainer,
         GmapComponent,
         RsvpComponent,
-        RSVPContactComponent
+        RSVPContactComponent,
+        PlaylistContainer
     ],
     imports: [
         BrowserModule,

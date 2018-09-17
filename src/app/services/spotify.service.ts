@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {SpotifyArtist, SpotifySearchTrackResponse, SpotifyTrack} from '../models/spotify.model';
-import moment = require('moment');
+import * as moment from 'moment';
 
 
 @Injectable()
@@ -18,13 +18,27 @@ export class SpotifyService {
                   return acc + ((!!acc) ? ' & ' : '') + artist.name;
                 }, ''),
       trackName: track.name,
-      image: track.album.images
+      images: track.album.images
                 .reduce((acc, image) => {
-                  return acc.height < image.height
-                    ? acc
+                  const xs = acc.xs.height < image.height
+                    ? acc.xs
                     : image;
-                }, {height: 9999, url: '', width: 9999})
-                .url,
+                  const xl = image.height !== 300
+                    ? acc.xl
+                    : image;
+                  return {xs, xl};
+                }, {
+                  xs: {
+                    height: 9999,
+                    width: 9999,
+                    url: ''
+                  },
+                  xl: {
+                    height: 0,
+                    width: 0,
+                    url: ''
+                  }
+                }),
       duration: moment(track.duration_ms).format('m:ss'),
       link: track.external_urls.spotify
     };

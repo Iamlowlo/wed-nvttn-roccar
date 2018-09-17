@@ -85,7 +85,7 @@
     </div>
     <div class="info">
         <h2>¿Nos echas una mano con la música?</h2>
-        <p>Vas a tener que echarnos una mano. Tenemos un montón de ideas de canciones que poner, pero no sabemos cuál poner.</p>
+        <p>Vas a tener que echarnos una mano. Tenemos un montón de ideas de canciones que poner, pero no sabemos cuál.</p>
         <p>Aquí está un buscador para que nos digas las canciones que te gustaría escuchar. Nosotros con las que nos digáis todos las ordenaremos y haremos una lista de reproducción.</p>
         <p>Anímate!</p>
         <div class="searchbox-container">
@@ -116,7 +116,7 @@
                     <li class="search-song-suggestions__element"
                         *ngFor="let searchSongSuggestion of searchSongSuggestions"
                         (click)="pickTrack(searchSongSuggestion)">
-                        <div><img [src]="searchSongSuggestion.image" [alt]="searchSongSuggestion.trackName"></div>
+                        <div><img [src]="searchSongSuggestion.images.xs.url" [alt]="searchSongSuggestion.trackName"></div>
                         <ul class="search-song-suggestions__element__info">
                             <li>{{searchSongSuggestion.artist}} - {{searchSongSuggestion.trackName}}</li>
                             <li>{{searchSongSuggestion.duration}}</li>
@@ -131,12 +131,14 @@
             <ul class="picked-tracks">
                 <li *ngFor="let trackPicked of tracksPicked"
                     class="picked-tracks__element">
-                    <div><img [src]="trackPicked.image" [alt]="trackPicked.trackName"></div>
-                    <ul class="picked-tracks__element__info">
-                        <li class="picked-tracks__element__track-name">{{trackPicked.artist}} - {{trackPicked.trackName}}</li>
-                        <li class="picked-tracks__element__action">Escuchar <i class="icon-angle-right"></i></li>
-                        <li class="picked-tracks__element__action picked-tracks__element__action--delete" (click)="removeTrack(trackPicked)">Borar <i class="icon-cross"></i></li>
-                    </ul>
+                    <div class="picked-tracks__element__wrapper">
+                        <div class="img_container"><img [src]="trackPicked.images.xl.url" [alt]="trackPicked.trackName"></div>
+                        <ul class="picked-tracks__element__info">
+                            <li class="picked-tracks__element__track-name">{{trackPicked.artist}} - {{trackPicked.trackName}}</li>
+                            <li class="picked-tracks__element__action picked-tracks__element__action--listen"><a [href]="trackPicked.link" target="_blank">Escuchar en Spotify <i class="icon-angle-right"></i></a></li>
+                            <li class="picked-tracks__element__action picked-tracks__element__action--delete" (click)="removeTrack(trackPicked)"><i class="icon-cross"></i></li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>

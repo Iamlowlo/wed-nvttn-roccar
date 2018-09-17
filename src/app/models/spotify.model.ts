@@ -26,7 +26,13 @@ export interface SpotifyFormattedTrack {
   artist: string;
   duration: string;
   id: string;
-  image: string;
+  images: {
+    xs: {
+      height: number;
+      width: number;
+      url: string;
+    }
+  };
   link: string;
   trackName: string;
 }

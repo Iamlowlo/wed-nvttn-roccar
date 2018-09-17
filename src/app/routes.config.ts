@@ -10,6 +10,7 @@ import {RSVPContactComponent} from './containers/landing/containers/rsvp-contact
 import {IsAuthGuardService} from './services/is-auth-guard.service';
 import {IsInvitedGuardService} from './services/is-invited-guard.service';
 import {IsAdminGuardService} from './services/is-admin-guard.service';
+import {PlaylistContainer} from './containers/playlist/playlist.container';
 
 export const AppRoutes: Routes = [
     {
@@ -17,6 +18,24 @@ export const AppRoutes: Routes = [
         component: LoginComponent
     }, {
         path: 'admin',
+        canActivate: [IsAdminGuardService],
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'guestlist'
+          },
+          {
+            path: 'guestlist',
+            component: AdminComponent
+          },
+          {
+            path: 'playlist',
+            component: PlaylistContainer
+          }
+        ]
+    }, {
+        path: 'playlist',
         component: AdminComponent,
         canActivate: [IsAdminGuardService]
     },
