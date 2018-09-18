@@ -73,7 +73,8 @@ nav {
   &--title {
     margin-bottom: 0.5em;
   }
-  &--users{
+  &--users,
+  &--tracklist {
     margin-bottom: 2em;
     &--summary {
       display: flex;
@@ -81,6 +82,7 @@ nav {
       justify-content: space-between;
     }
     &--list {
+      padding-bottom: 2em;
       th {
         padding-bottom: 1em;
       }
@@ -90,14 +92,67 @@ nav {
       &__small {
         width: 100px;
       }
+      &__medium {
+        width: 200px;
+      }
     }
   }
-  &--user{
+  &--users {
+    h2 {
+      color: $jellyBean;
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+      cursor: pointer;
+    }
+    .icon-angle-down {
+      display: inline-block;
+      vertical-align: middle;
+      &.opened {
+        transform: rotateZ(180deg);
+      }
+    }
+  }
+  &--tracklist {
+    &--list {
+      td {
+        padding: 0.2em 0.4em;
+        border-bottom: 1px solid $purple;
+      }
+    }
+    .icon-spotify {
+      opacity: 1;
+      color: $greenPigment;
+    }
+
+    .spotify-btn {
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      padding: 0.5em;
+      background-color: $onyx;
+      color: $polite_white;
+      text-decoration: none;
+      border-radius: 2px;
+      border: none;
+      font-size: 1em;
+      span {
+        margin-left: 0.4em;
+        font-size: 0.8em;
+        line-height: 1.2em;
+      }
+    }
+  }
+  &--user,
+  &--track{
     .icon-cross {
       opacity: 0.1;
     }
+    .image-container {
+      display: flex;
+      align-items: center;
+    }
     i {
-      opacity: 0.3;
+      opacity: 0.15;
       &.will-come,
       &.will-not-come {
         opacity: 1;
@@ -108,6 +163,10 @@ nav {
       &.will-not-come {
         color: $crimson;
       }
+    }
+    &--thumbnail {
+      height: 35px;
+      width: 35px;
     }
   }
 }

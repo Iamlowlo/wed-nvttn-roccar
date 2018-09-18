@@ -256,8 +256,22 @@
       cursor: pointer;
       &--listen {
         a {
+          display: flex;
+          align-items: center;
+          padding: 0.5em;
+          background-color: $onyx;
+          color: $polite_white;
           text-decoration: none;
-          color: $darkGreenPigment;
+          border-radius: 2px;
+          span {
+            margin-left: 0.4em;
+            font-size: 0.8em;
+            line-height: 1.2em;
+          }
+        }
+        .icon-spotify {
+          opacity: 1;
+          color: $greenPigment;
         }
       }
       &--delete {

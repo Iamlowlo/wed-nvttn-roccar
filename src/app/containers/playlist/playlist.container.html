@@ -1,3 +1,88 @@
-<p>
-  playlist works!
-</p>
+<section class="main-wrapper">
+    <header>
+        <h1>Página de admin</h1></header>
+    <nav>
+        <ul>
+            <li [routerLink]="['/landing/ceremonia']"
+                [routerLinkActive]="['active']">Ceremonia</li>
+            <li [routerLink]="['/landing/comida']"
+                [routerLinkActive]="['active']">Comida</li>
+            <li [routerLink]="['/landing/fiesta']"
+                [routerLinkActive]="['active']">Fiesta</li>
+            <li [routerLink]="['rsvp-contacto']"
+                [routerLinkActive]="['active']">RSVP</li>
+            <li [routerLink]="['/admin/guestlist']"
+                [routerLinkActive]="['active']">Invitados</li>
+            <li [routerLink]="['/admin/playlist']"
+                [routerLinkActive]="['active']">Lista de reproducción</li>
+        </ul>
+    </nav>
+    <main class="admin">
+        <section class="admin--users">
+            <h1 class="admin--title">Lista de invitados</h1>
+            <h2 (click)="toggleAttendee()">Vedrán a la fiesta <i class="icon-angle-down" [ngClass]="{'opened': attendeeOpened}"></i></h2>
+            <table class="admin--users--list"
+                   *ngIf="attendeeOpened"
+                   [@dropDown]="{value:'*', params: {duration: 200}}">
+                <thead>
+                <tr>
+                    <th class="alignleft">Nombre</th>
+                    <th class="alignleft">Email</th>
+                    <th class="admin--users--list__medium">¿Ha propuesto canciones?</th>
+                </tr>
+                </thead>
+                <tr *ngFor="let user of attendeeDataList" class="admin--user">
+                    <td class="alignleft">{{user.name}}</td>
+                    <td class="alignleft">{{user.email}}</td>
+                    <td><i class="icon-checkmark"
+                           [ngClass]="{'will-come': user.rsvp && user.tracks && user.party && user.rsvp.party,
+                                       'will-not-come': user.rsvp && user.tracks && user.rsvp.party !== undefined && user.party && !user.rsvp.party}"></i></td>
+                </tr>
+            </table>
+            <h2 (click)="toggleNonAttendee()">No vedrán o no han contestado <i class="icon-angle-down" [ngClass]="{'opened': nonAttendeeOpened}"></i></h2>
+            <table class="admin--users--list"
+                   *ngIf="nonAttendeeOpened"
+                   [@dropDown]="{value:'*', params: {duration: 200}}">
+                <thead>
+                <tr>
+                    <th class="alignleft">Nombre</th>
+                    <th class="alignleft">Email</th>
+                    <th class="admin--users--list__medium">¿Ha propuesto canciones?</th>
+                </tr>
+                </thead>
+                <tr *ngFor="let user of nonAttendeeDataList" class="admin--user">
+                    <td class="alignleft">{{user.name}}</td>
+                    <td class="alignleft">{{user.email}}</td>
+                    <td><i class="icon-checkmark"
+                           [ngClass]="{'will-come': user.rsvp && user.tracks && user.party && user.rsvp.party,
+                                       'will-not-come': user.rsvp && user.tracks && user.rsvp.party !== undefined && user.party && !user.rsvp.party}"></i></td>
+                </tr>
+            </table>
+        </section>
+        <section class="admin--tracklist">
+            <h1 class="admin--title">Lista de canciones</h1>
+            <table class="admin--tracklist--list" cellspacing="0">
+                <thead>
+                <tr>
+                    <th class="alignleft"></th>
+                    <th class="alignleft">Artista</th>
+                    <th class="alignleft">Título</th>
+                    <th class="alignleft">Link</th>
+                    <th>Veces pedida</th>
+                    <th>Añadir a playlist</th>
+                </tr>
+                </thead>
+                <tr *ngFor="let track of suggestedTracks" class="admin--track">
+                    <td class="image-container"><img [src]="track.images.xs.url"
+                             [alt]="track.artist + ' - ' + track.trackName"
+                             class="admin--track--thumbnail"></td>
+                    <td class="alignleft">{{track.artist}}</td>
+                    <td class="alignleft">{{track.trackName}}</td>
+                    <td class="alignleft"><a [href]="track.link" class="spotify-btn" target="_blank"><i class="icon-spotify"></i><span>Listen</span></a></td>
+                    <td>{{track.occurrences}}</td>
+                    <td><button type="button" class="spotify-btn" (click)="addTrackToPlaylist(track.id)"><i class="icon-spotify"></i><span>Add to playlist</span></button></td>
+                </tr>
+            </table>
+        </section>
+    </main>
+</section>

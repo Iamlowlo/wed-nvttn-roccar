@@ -1,3 +1,5 @@
+import {SpotifyFormattedTrack} from './spotify.model';
+
 export interface User {
   name: String;
   email: String;
@@ -10,4 +12,5 @@ export interface User {
     lunch: Boolean;
     party: Boolean;
   };
+  tracks?: Array<SpotifyFormattedTrack>;
 }

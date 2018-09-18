@@ -135,7 +135,7 @@
                         <div class="img_container"><img [src]="trackPicked.images.xl.url" [alt]="trackPicked.trackName"></div>
                         <ul class="picked-tracks__element__info">
                             <li class="picked-tracks__element__track-name">{{trackPicked.artist}} - {{trackPicked.trackName}}</li>
-                            <li class="picked-tracks__element__action picked-tracks__element__action--listen"><a [href]="trackPicked.link" target="_blank">Escuchar en Spotify <i class="icon-angle-right"></i></a></li>
+                            <li class="picked-tracks__element__action picked-tracks__element__action--listen"><a [href]="trackPicked.link" target="_blank"><i class="icon-spotify"></i><span>Escuchar</span></a></li>
                             <li class="picked-tracks__element__action picked-tracks__element__action--delete" (click)="removeTrack(trackPicked)"><i class="icon-cross"></i></li>
                         </ul>
                     </div>

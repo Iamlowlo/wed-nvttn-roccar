@@ -35,6 +35,7 @@ export interface SpotifyFormattedTrack {
   };
   link: string;
   trackName: string;
+  occurrences?: number;
 }
 
 export interface SpotifyArtist {

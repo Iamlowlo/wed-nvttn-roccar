@@ -44,7 +44,6 @@ export class PartyContainer implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('Init');
     this.subscriptions.push(
       this.db.object('data/spotify')
         .valueChanges()
