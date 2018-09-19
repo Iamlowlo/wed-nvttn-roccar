@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {SpotifyFormattedTrack} from '../../models/spotify.model';
 import {dropDown} from '../../app.animations';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-playlist',
@@ -20,6 +21,7 @@ export class PlaylistContainer implements OnInit, OnDestroy {
   public nonAttendeeOpened: Boolean;
   public attendeeOpened: Boolean;
   public suggestedTracks: Array<SpotifyFormattedTrack>;
+  public totalTime: string;
 
   constructor(private db: AngularFireDatabase) {
     this.subscriptions = [];
@@ -28,6 +30,7 @@ export class PlaylistContainer implements OnInit, OnDestroy {
     this.nonAttendeeOpened = false;
     this.attendeeOpened = false;
     this.suggestedTracks = [];
+    this.totalTime = '';
 
     this.subscriptions.push(
       this.db
@@ -47,7 +50,7 @@ export class PlaylistContainer implements OnInit, OnDestroy {
           _userDataList.filter(user => !!user.tracks)
             .forEach(user => {
               suggestedTracks = suggestedTracks.concat(user.tracks);
-            })
+            });
           this.suggestedTracks = suggestedTracks.reduce((acc, track: SpotifyFormattedTrack) => {
             const trackIndex = acc.findIndex(_track => _track.id === track.id);
             if (trackIndex >= 0) {
@@ -57,6 +60,10 @@ export class PlaylistContainer implements OnInit, OnDestroy {
             }
             return acc;
           }, []);
+          this.totalTime = moment()
+            .startOf('day')
+            .add(this.suggestedTracks.reduce((acc, track) => track.duration_ms + acc, 0), 'ms')
+            .format('HH:mm:ss');
         })
     );
   }

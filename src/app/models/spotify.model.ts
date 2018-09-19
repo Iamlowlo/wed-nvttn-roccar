@@ -25,6 +25,7 @@ export interface SpotifyTrack {
 export interface SpotifyFormattedTrack {
   artist: string;
   duration: string;
+  duration_ms: number;
   id: string;
   images: {
     xs: {

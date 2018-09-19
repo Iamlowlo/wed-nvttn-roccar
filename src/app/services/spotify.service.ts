@@ -40,6 +40,7 @@ export class SpotifyService {
                   }
                 }),
       duration: moment(track.duration_ms).format('m:ss'),
+      duration_ms: track.duration_ms,
       link: track.external_urls.spotify
     };
   }
