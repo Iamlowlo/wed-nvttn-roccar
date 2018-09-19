@@ -86,6 +86,7 @@
 
 .costume-gallery {
   position: relative;
+  padding-bottom: 2em;
   &-container {
     display: flex;
     overflow: auto;
@@ -132,6 +133,10 @@
   }
 }
 
+.playlist {
+  padding-top: 3em;
+}
+
 .searchbox {
   display: flex;
   &-container {
@@ -157,6 +162,7 @@
 }
 
 .search-song-suggestions {
+  $search-song-suggestions: &;
   width: 100%;
   max-height: 15em;
   overflow: auto;
@@ -172,6 +178,14 @@
     border: 1px solid $purple;
     border-top: none;
     z-index: 1;
+    &--upside-down {
+      transform: rotateX(180deg);
+      top: inherit;
+      bottom: 100%;
+      #{$search-song-suggestions} {
+        transform: rotateX(180deg);
+      }
+    }
   }
   &__element {
     display: flex;

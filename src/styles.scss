@@ -71,3 +71,47 @@ p {
   font-size: 0.9em;
 }
 
+.menu {
+  background-color: #F9F9F9;
+  color: $purple;
+  border: 2px solid $darkPurple;
+  box-shadow: 2px 2px 0px $purple inset, -2px -2px 0px $purple inset;
+  font-family: $openSans;
+  padding: 1.5em;
+  margin: 0 auto 1.5em;
+  max-width: 600px;
+  text-align: center;
+  overflow: hidden;
+  &-course {
+    &-container {
+      &:not(:last-child) {
+        margin-bottom: 1em;
+      }
+    }
+    &-title {
+      font-family: $openSans;
+      color: $darkPurple;
+      margin-bottom: 0.2em;
+    }
+    &-dish {
+      &__side-order {
+        opacity: 0.9;
+      }
+    }
+  }
+  &-dropdown {
+    &-control {
+      cursor: pointer;
+      i {
+        display: inline-block;
+        transition: transform 0.2s ease-in-out;
+      }
+      &.opened {
+        i {
+          transform: rotateX(180deg);
+        }
+      }
+    }
+  }
+}
+

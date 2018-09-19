@@ -1,5 +1,5 @@
 import {Component, ElementRef, HostBinding, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {routerTransition} from '../../../../app.animations';
+import {routerTransition, dropDown} from '../../../../app.animations';
 import {FormControl, FormGroup} from '@angular/forms';
 import {SpotifyService} from '../../../../services/spotify.service';
 import {AngularFireDatabase} from 'angularfire2/database';
@@ -13,13 +13,16 @@ import {User} from '../../../../models/user.model';
   selector: 'app-party',
   templateUrl: './party.container.html',
   styleUrls: ['./party.container.scss'],
-  animations: [routerTransition]
+  animations: [routerTransition, dropDown]
 })
 export class PartyContainer implements OnInit, OnDestroy {
   @HostBinding('@routerTransition') public isLoaded = {value: '*', params: {duration: 800}};
   @ViewChild('audio') audio: ElementRef;
   @ViewChild('galleryContainer') galleryContainer: ElementRef;
+  @ViewChild('searchboxContainer') searchboxContainer: ElementRef;
   private isPlayingAudio: Boolean = true;
+  public isMenuOpen: Boolean = false;
+  public suggestionsNotFitting: Boolean = true;
   private subscriptions: Array<Subscription>;
   private spotifyTokenData: SpotifyToken;
   public partyAddress = {
@@ -66,6 +69,11 @@ export class PartyContainer implements OnInit, OnDestroy {
             this.tracksPicked = !!userTracks && userTracks.length
               ? userTracks
               : [];
+            setTimeout(() => {
+              this.suggestionsNotFitting = document.body.offsetHeight -
+                this.searchboxContainer.nativeElement.offsetHeight -
+                this.searchboxContainer.nativeElement.offsetTop <= 350;
+            }, 0);
           })
     );
   }
@@ -113,7 +121,6 @@ export class PartyContainer implements OnInit, OnDestroy {
   }
 
   pickTrack(track) {
-    this.searchSuggestionsOpened = false;
     if (!this.tracksPicked.filter(_track => _track.id === track.id).length) {
       this.tracksPicked.push(track);
       this.db.database.ref()
@@ -151,12 +158,23 @@ export class PartyContainer implements OnInit, OnDestroy {
     } else {
       this.searchSuggestionsOpened = true;
       this.searchSongSuggestions = [];
+      this.suggestionsNotFitting = document.body.offsetHeight -
+        this.searchboxContainer.nativeElement.offsetHeight -
+        this.searchboxContainer.nativeElement.offsetTop <= 350;
       this.spotifyService
         .searchSong(this.spotifyTokenData.token, searchValue || this.searchForm.controls.song.value)
         .subscribe((results: Array<SpotifyFormattedTrack>) => {
           this.searchSongSuggestions = results;
         });
     }
+  }
+
+  clickAwaySearchbox() {
+    this.searchSuggestionsOpened = false;
+  }
+
+  toggleDropdown() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
   ngOnDestroy() {

@@ -1,4 +1,4 @@
-<section>
+<section (click)="clickAwaySearchbox()">
     <header>
         <h1>¿Quieres celebrarlo con nosotros?</h1>
     </header>
@@ -6,13 +6,13 @@
         <div>
             <p>Vamos a juntar a lo mejor de cada casa como si de la cantina de Mos Eisley se tratase y queremos que seas parte de ello.</p>
             <p>Alguien ha filtrado al imperio que íbamos a estar todos aquí reunidos y ha mandado un destacamento de Stormtroopers, y como no queremos ser detectados todos vamos a tener que ir disfrazados.</p>
-            <audio #audio src="assets/StarWars-CantinaSong.mp3" ></audio>
+            <audio #audio src="assets/StarWars-CantinaSong.mp3" autoplay></audio>
         </div>
         <img src="assets/mosEisley.gif" alt="Cantina Mos Eisley">
         <button class="btn btn-transp" (click)="pauseMusic()">Pausa la música</button>
     </div>
     <div class="info">
-        <h2>¿Pero en qué va a consistir esto?</h2>
+        <h2>¿Pero en qué va a consistir?</h2>
         <p>Queremos hacer una fiesta original donde nos lo pasemos todos bien haciendo un poco el payaso y se nos ocurrió la idea de que fuese una fiesta de disfraces ambientada en Star Wars.</p>
         <p>No estás obligado a disfrazarte, por supuesto, pero te agradeceríamos que lo hicieses para así unirte mejor al grupo.</p>
         <p>Habrá bebida y pondremos un catering para comer mientras tanto, así que solo tienes que venir con ganas de divertirte.</p>
@@ -78,17 +78,76 @@
         </div>
     </div>
     <div class="info">
+        <h2>¿Habrá algo para comer?</h2>
+        <p class="menu-dropdown-control"
+           [ngClass]="{'opened': isMenuOpen}"
+           (click)="toggleDropdown()">¡Por supuesto! Aquí tienes el menú: <i class="icon-angle-down"></i></p>
+        <ol *ngIf="isMenuOpen"
+            [@dropDown]="{value:'*', params:{duration: 500}}"
+            class="menu">
+            <li class="menu-course-container">
+                <article class="menu-course">
+                    <h1 class="menu-course-title">Aperitivos</h1>
+                    <ul>
+                        <li class="menu-course-dish">Lascas de Jamón con Picos Andaluces</li>
+                        <li class="menu-course-dish">Melanza de Quesos con Uvas y Nueces</li>
+                        <li class="menu-course-dish">Brochetas de Mozzarella con Cherry</li>
+                        <li class="menu-course-dish">Nachos con Queso y Guacamole</li>
+                        <li class="menu-course-dish">Tortilla Española</li>
+                        <li class="menu-course-dish">Mini Hojaldres Variados</li>
+                        <li class="menu-course-dish">Pintxo Gilda con Anchoa y Piquillo</li>
+                    </ul>
+                </article>
+            </li>
+            <li class="menu-course-container">
+                <article class="menu-course">
+                    <h1 class="menu-course-title">Principales</h1>
+                    <ul>
+                        <li class="menu-course-dish">Zurito de Pularda y Canónigos</li>
+                        <li class="menu-course-dish">Bocado de Salmón con Queso Tierno</li>
+                        <li class="menu-course-dish">Ricitos de Pollo</li>
+                        <li class="menu-course-dish">Brochetas de Solomillo</li>
+                        <li class="menu-course-dish">Crocante de Morcilla con Pistachos</li>
+                        <li class="menu-course-dish">Mini Sandwiches Gourmet</li>
+                        <li class="menu-course-dish">Mini Burguer de Buey</li>
+                        <li class="menu-course-dish">Piruletas de Ternera con Ibérico</li>
+                        <li class="menu-course-dish">Ferrero Roché de Mejillón con Kikos</li>
+                        <li class="menu-course-dish">Brocheta de Pollo con Verduritas</li>
+                    </ul>
+                </article>
+            </li>
+            <li class="menu-course-container">
+                <article class="menu-course">
+                    <h1 class="menu-course-title">Postres</h1>
+                    <ul>
+                        <li class="menu-course-dish">Brocheta de Fruta Natural</li>
+                        <li class="menu-course-dish">Trufas de Tres Chocolates</li>
+                    </ul>
+                </article>
+            </li>
+            <li class="menu-course-container">
+                <article class="menu-course">
+                    <h1 class="menu-course-title">Bebidas</h1>
+                    <ul>
+                        <li class="menu-course-dish">Barra libre de cerveza, vino y refrescos hasta las 23.30</li>
+                        <li class="menu-course-dish">Barra libre de copas de 23.30 a 3.30</li>
+                    </ul>
+                </article>
+            </li>
+        </ol>
+    </div>
+    <div class="info">
         <h2>¿Cuándo y dónde va a ser todo esto?</h2>
-        <p>El día 17 de noviembre de 2018</p>
+        <p>El día 17 de noviembre de 2018 a las 21.30h</p>
         <p>Malavita. Calle del Cardenal Cisneros, 35, 28010 Madrid</p>
         <app-gmap class="gmap" [latLng]="partyAddress"></app-gmap>
     </div>
-    <div class="info">
+    <div class="info playlist">
         <h2>¿Nos echas una mano con la música?</h2>
         <p>Vas a tener que echarnos una mano. Tenemos un montón de ideas de canciones que poner, pero no sabemos cuál.</p>
         <p>Aquí está un buscador para que nos digas las canciones que te gustaría escuchar. Nosotros con las que nos digáis todos las ordenaremos y haremos una lista de reproducción.</p>
         <p>Anímate!</p>
-        <div class="searchbox-container">
+        <div class="searchbox-container" #searchboxContainer>
             <form class="searchbox"
                   novalidate
                   [formGroup]="searchForm"
@@ -107,12 +166,15 @@
                 <button class="btn"><i class="icon-search"></i></button>
             </form>
             <div  *ngIf="!!searchSuggestionsOpened"
-                  class="search-song-suggestions__container" >
+                  class="search-song-suggestions__container"
+                  [ngClass]="{'search-song-suggestions__container--upside-down': suggestionsNotFitting}">
                 <img *ngIf="!searchSongSuggestions.length"
                      class="search-song-suggestion"
                      src="assets/starwars_loader.gif"
                      alt="loader"/>
-                <ul class="search-song-suggestions" *ngIf="searchSongSuggestions.length">
+                <ul class="search-song-suggestions"
+                    *ngIf="searchSongSuggestions.length"
+                    [@dropDown]="{value:'*', params: {duration: 200}}">
                     <li class="search-song-suggestions__element"
                         *ngFor="let searchSongSuggestion of searchSongSuggestions"
                         (click)="pickTrack(searchSongSuggestion)">
