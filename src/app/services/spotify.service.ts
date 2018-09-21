@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {SpotifyArtist, SpotifySearchTrackResponse, SpotifyTrack} from '../models/spotify.model';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 
 
 @Injectable()
@@ -18,19 +19,33 @@ export class SpotifyService {
                   return acc + ((!!acc) ? ' & ' : '') + artist.name;
                 }, ''),
       trackName: track.name,
-      images: track.album.images
-                .reduce((acc, image) => {
-                  const xs = acc.xs.height < image.height
-                    ? acc.xs
-                    : image;
-                  const xl = image.height !== 300
-                    ? acc.xl
-                    : image;
-                  return {xs, xl};
+      images: _.orderBy(track.album.images, ['height'], ['asc'])
+                .reduce((acc, image, index, total) => {
+                  switch (index) {
+                      case 0:
+                        return {...acc, xs: image}
+                      case 1:
+                        return {
+                            ...acc,
+                            md: image,
+                            xl: total.length === 2
+                                ? image
+                                : acc.xl
+                        }
+                      case 2:
+                        return {...acc, xl: image}
+                      default:
+                          return acc;
+                  }
                 }, {
                   xs: {
-                    height: 9999,
-                    width: 9999,
+                    height: 0,
+                    width: 0,
+                    url: ''
+                  },
+                  md: {
+                    height: 0,
+                    width: 0,
                     url: ''
                   },
                   xl: {
