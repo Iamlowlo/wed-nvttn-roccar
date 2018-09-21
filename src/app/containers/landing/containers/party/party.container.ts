@@ -149,7 +149,7 @@ export class PartyContainer implements OnInit, OnDestroy {
         });
   }
 
-  searchSong(searchValue: string) {
+  searchSong(searchValue?: string) {
     if (!searchValue && !this.searchForm.controls.song.value) {
       return false;
     }
