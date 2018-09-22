@@ -140,11 +140,11 @@
 .searchbox {
   display: flex;
   &-container {
-    width: 29.9em;
     position: relative;
   }
   input {
-    width: 25em;
+    width: 100%;
+    max-width: 25em;
   }
   label {
     color: $darkPurple;
@@ -158,6 +158,11 @@
     align-self: flex-end;
     width: 3em;
     padding: 0.7em 0.6em 0.4em;
+  }
+  @media (min-width: 780px) {
+    .sole_input_container {
+      width: 27.5em;
+    }
   }
 }
 
@@ -233,7 +238,13 @@
   &__element {
     $picked-tracks__element: &;
     width: 100%;
+    padding-bottom: 1em;
+    .img_container {
+      width: 90px;
+      flex-shrink: 0;
+    }
     img {
+      display: block;
       width: 100%;
     }
     &:hover {
@@ -243,21 +254,22 @@
 
     }
     &__wrapper {
+      display: flex;
       overflow: hidden;
       position: relative;
       border: 1px solid $darkPurple;
+      background-color: white;
     }
     &__info {
-      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       bottom: 0;
       left: 0;
       right: 0;
+      width: 100%;
       background-color: white;
-      display: flex;
-      justify-content: space-between;
-      border-top: 1px solid $darkPurple;
       flex-wrap: wrap;
-      box-shadow: 0 0 50px $onyx;
       transition: box-shadow 200ms ease-in;
       li {
         padding: 0.5em;
@@ -265,9 +277,11 @@
     }
     &__track-name {
       width: 100%;
+      font-size: 0.9em;
     }
     &__action {
       cursor: pointer;
+      font-size: 0.85em;
       &--listen {
         a {
           display: flex;
@@ -290,23 +304,62 @@
       }
       &--delete {
         text-align: right;
-        position: absolute;
         bottom: 100%;
         right: -1px;
         background-color: white;
         border: 1px solid $darkPurple;
-        border-bottom: none;
+        height: 2.1em;
+        padding: 0.5em 0.45em 0.5em 0.55em;
+        margin-right: 0.5em;
       }
     }
     @media (min-width: 480px) {
-      width: 50%;
+      &__track-name {
+        font-size: 1em;
+      }
+    }
+    @media (min-width: 640px) {
       padding: 1em;
+      &__wrapper {
+        .img_container {
+          width: 150px;
+        }
+      }
+      &__action {
+        font-size: 1em;
+      }
+      &__track-name {
+        font-size: 1.2em;
+      }
+    }
+    @media (min-width: 780px) {
+      width: 33%;
+      &__wrapper {
+        display: block;
+        .img_container {
+          width: 100%;
+        }
+      }
+      &__info {
+        position: absolute;
+        box-shadow: 0 0 50px $onyx;
+        border-top: 1px solid $darkPurple;
+        min-height: 50%;
+      }
+      &--delete {
+        border-bottom: none;
+        position: absolute;
+        margin-right: 0;
+      }
+      &__track-name {
+        font-size: 1em;
+      }
     }
     @media (min-width: 1024px) {
-      width: 33%;
+      width: 25%;
     }
   }
-  @media (min-width: 480px) {
+  @media (min-width: 640px) {
     margin: -1em;
   }
 }

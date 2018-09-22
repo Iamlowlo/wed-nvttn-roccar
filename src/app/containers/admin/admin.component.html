@@ -68,6 +68,7 @@
                                        'icon-cross': !user.party,
                                        'will-come': user.rsvp && user.party && user.rsvp.party,
                                        'will-not-come': user.rsvp && user.rsvp.party !== undefined && user.party && !user.rsvp.party}"></i></td>
+                    <td><button type="button" (click)="sendEmailVerification()" class="btn btn-primary">ENVIAR EMAIL</button></td>
                 </tr>
             </table>
         </section>

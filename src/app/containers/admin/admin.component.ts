@@ -3,6 +3,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import * as _ from 'lodash';
 import {User} from '../../models/user.model';
 import {Subscription} from 'rxjs/Subscription';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   selector: 'app-admin',
@@ -15,7 +16,7 @@ export class AdminComponent implements OnInit {
   public nonAttendanceData;
   public nonRespondedData;
   private subscriptions: Array<Subscription>;
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
     this.attendanceData = {ceremony: 0, lunch: 0, party: 0};
     this.nonAttendanceData = {ceremony: 0, lunch: 0, party: 0};
     this.nonRespondedData = {ceremony: 0, lunch: 0, party: 0};
@@ -72,4 +73,7 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
 
+  sendEmailVerification(guestEmail) {
+    console.log('EMAIL')
+  }
 }

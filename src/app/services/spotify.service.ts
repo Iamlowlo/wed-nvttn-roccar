@@ -23,7 +23,7 @@ export class SpotifyService {
                 .reduce((acc, image, index, total) => {
                   switch (index) {
                       case 0:
-                        return {...acc, xs: image}
+                        return {...acc, xs: image};
                       case 1:
                         return {
                             ...acc,
@@ -31,9 +31,9 @@ export class SpotifyService {
                             xl: total.length === 2
                                 ? image
                                 : acc.xl
-                        }
+                        };
                       case 2:
-                        return {...acc, xl: image}
+                        return {...acc, xl: image};
                       default:
                           return acc;
                   }

@@ -194,7 +194,9 @@
                 <li *ngFor="let trackPicked of tracksPicked"
                     class="picked-tracks__element">
                     <div class="picked-tracks__element__wrapper">
-                        <div class="img_container"><img [src]="trackPicked.images.xl.url" [alt]="trackPicked.trackName"></div>
+                        <div class="img_container">
+                            <img [srcset]="trackPicked.images.xs.url + ' 64w, ' + trackPicked.images.md.url + ' 300w, ' + trackPicked.images.xl.url + ' 640w'"
+                                 sizes="(max-width: 320px) 90px, (max-width: 900px) 400px, 500px" [alt]="trackPicked.trackName"></div>
                         <ul class="picked-tracks__element__info">
                             <li class="picked-tracks__element__track-name">{{trackPicked.artist}} - {{trackPicked.trackName}}</li>
                             <li class="picked-tracks__element__action picked-tracks__element__action--listen"><a [href]="trackPicked.link" target="_blank"><i class="icon-spotify"></i><span>Escuchar</span></a></li>
