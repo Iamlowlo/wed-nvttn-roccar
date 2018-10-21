@@ -68,7 +68,8 @@
                                        'icon-cross': !user.party,
                                        'will-come': user.rsvp && user.party && user.rsvp.party,
                                        'will-not-come': user.rsvp && user.rsvp.party !== undefined && user.party && !user.rsvp.party}"></i></td>
-                    <td><button type="button" (click)="sendEmailVerification()" class="btn btn-primary">ENVIAR EMAIL</button></td>
+
+                    <td><button type="button" (click)="sendReminderMail(user.email)" class="btn btn-primary"><span>Enviar recordatorio</span></button></td>
                 </tr>
             </table>
         </section>

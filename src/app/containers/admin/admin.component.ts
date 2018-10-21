@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 import {User} from '../../models/user.model';
 import {Subscription} from 'rxjs/Subscription';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {MailerService} from '../../services/mailer.service';
 
 @Component({
   selector: 'app-admin',
@@ -16,7 +17,7 @@ export class AdminComponent implements OnInit {
   public nonAttendanceData;
   public nonRespondedData;
   private subscriptions: Array<Subscription>;
-  constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
+  constructor(private db: AngularFireDatabase, private mailerService: MailerService) {
     this.attendanceData = {ceremony: 0, lunch: 0, party: 0};
     this.nonAttendanceData = {ceremony: 0, lunch: 0, party: 0};
     this.nonRespondedData = {ceremony: 0, lunch: 0, party: 0};
@@ -65,7 +66,6 @@ export class AdminComponent implements OnInit {
                 : acc.party
             };
           }, {ceremony: 0, lunch: 0, party: 0});
-          console.log(this.attendanceData);
         })
     ];
   }
@@ -73,7 +73,14 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
 
-  sendEmailVerification(guestEmail) {
-    console.log('EMAIL')
+  sendReminderMail(userEmail: string) {
+    this.mailerService.sendEmailToUser(userEmail, 'reminder')
+      .subscribe(response => {
+        if (response) {
+          console.log('SENT', response.message);
+        } else {
+          console.log('NOT SENT', response.err);
+        }
+      });
   }
 }

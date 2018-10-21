@@ -30,6 +30,7 @@ import {IsAdminGuardService} from './services/is-admin-guard.service';
 import {HttpClientModule} from '@angular/common/http';
 import {SpotifyService} from './services/spotify.service';
 import { PlaylistContainer } from './containers/playlist/playlist.container';
+import {MailerService} from './services/mailer.service';
 
 
 
@@ -73,7 +74,8 @@ const firebaseConfig = {
         IsAuthGuardService,
         IsAdminGuardService,
         IsInvitedGuardService,
-        SpotifyService
+        SpotifyService,
+        MailerService
     ],
     bootstrap: [AppComponent]
 })
