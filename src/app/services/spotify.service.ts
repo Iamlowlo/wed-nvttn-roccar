@@ -9,7 +9,8 @@ import * as _ from 'lodash';
 @Injectable()
 export class SpotifyService {
   private spotifyBasePath = 'https://api.spotify.com/v1/';
-  private spotifyAcountsPath = 'https://us-central1-wed-nvttn-roccar.cloudfunctions.net/getSpotifyToken';
+  private spotifyAccountsPath = 'https://accounts.spotify.com/';
+  private functionSpotifyAcountsPath = 'https://us-central1-wed-nvttn-roccar.cloudfunctions.net/getSpotifyToken';
 
   private searchTrackFormatter = (track: SpotifyTrack) => {
     return {
@@ -78,13 +79,30 @@ export class SpotifyService {
     });
   }
 
+  addSongToPlaylist(token: string, trackId: string) {
+    return this.http.post(`${this.spotifyBasePath}playlists/4AotvjmnBIFzPqXDYnExFX/tracks`, {
+      uris: [`spotify:track:${trackId}`]
+    }, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    }).map((snapshot: any) => snapshot);
+  }
+
   getToken(functionCallback?: Function) {
-    return this.http.get(this.spotifyAcountsPath).map(resp => {
-      console.log({resp});
+    return this.http.get(this.functionSpotifyAcountsPath).map(resp => {
       return functionCallback;
     });
-    // return this.http.get(this.spotifyAcountsPath).subscribe(resp => {
-    //   console.log({resp});
-    // });
+  }
+
+  getUserToken() {
+    console.log('window.location.host', window.location.host);
+    window.location.replace(`${this.spotifyAccountsPath}authorize` +
+    `?client_id=1386175e793f46ae893e9a2de9fb6b4f` +
+    `&redirect_uri=http://${window.location.host}/admin/playlist` +
+    `&response_type=token` +
+    `&scope=playlist-modify-private`);
   }
 }

@@ -119,6 +119,9 @@ nav {
         border-bottom: 1px solid $purple;
       }
     }
+    .constrained-cell {
+      max-width: 200px;
+    }
     .icon-spotify {
       opacity: 1;
       color: $greenPigment;
@@ -167,6 +170,11 @@ nav {
     &--thumbnail {
       height: 35px;
       width: 35px;
+    }
+  }
+  &--track {
+    &__added {
+      opacity: 0.5;
     }
   }
 }

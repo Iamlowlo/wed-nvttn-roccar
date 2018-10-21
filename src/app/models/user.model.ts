@@ -1,6 +1,7 @@
 import {SpotifyFormattedTrack} from './spotify.model';
 
 export interface User {
+  id?: String;
   name: String;
   email: String;
   lunch: Boolean;

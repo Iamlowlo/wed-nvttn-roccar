@@ -66,22 +66,30 @@
                 <thead>
                 <tr>
                     <th class="alignleft"></th>
-                    <th class="alignleft">Artista</th>
-                    <th class="alignleft">Título</th>
+                    <th class="alignleft">Añadida por</th>
+                    <th class="alignleft">Veces</th>
+                    <th class="alignleft constrained-cell">Artista</th>
+                    <th class="alignleft constrained-cell">Título</th>
                     <th class="alignleft">Link</th>
-                    <th>Veces pedida</th>
                     <th>Añadir a playlist</th>
                 </tr>
                 </thead>
-                <tr *ngFor="let track of suggestedTracks" class="admin--track">
-                    <td class="image-container"><img [src]="track.images.xs.url"
-                             [alt]="track.artist + ' - ' + track.trackName"
-                             class="admin--track--thumbnail"></td>
-                    <td class="alignleft">{{track.artist}}</td>
-                    <td class="alignleft">{{track.trackName}}</td>
+                <tr *ngFor="let track of suggestedTracks"
+                    class="admin--track"
+                    [ngClass]="{'admin--track__added': track.isIncluded}">
+                    <td>
+                        <div class="image-container">
+                            <img [src]="track.images.xs.url"
+                                 [alt]="track.artist + ' - ' + track.trackName"
+                                 class="admin--track--thumbnail">
+                        </div>
+                    </td>
+                    <td class="alignleft">{{track.userName}}</td>
+                    <td class="alignleft">{{track.occurrences}}</td>
+                    <td class="alignleft constrained-cell">{{track.artist}}</td>
+                    <td class="alignleft constrained-cell">{{track.trackName}}</td>
                     <td class="alignleft"><a [href]="track.link" class="spotify-btn" target="_blank"><i class="icon-spotify"></i><span>Listen</span></a></td>
-                    <td>{{track.occurrences}}</td>
-                    <td><button type="button" class="spotify-btn" (click)="addTrackToPlaylist(track.id)"><i class="icon-spotify"></i><span>Add to playlist</span></button></td>
+                    <td><button type="button" class="spotify-btn" (click)="addTrackToPlaylist(track)"><i class="icon-spotify"></i><span>Add to playlist</span></button></td>
                 </tr>
             </table>
         </section>
